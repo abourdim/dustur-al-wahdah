@@ -1,193 +1,1007 @@
-/* دستور الوحدة الثقافية — CHARTER OF CULTURAL UNITY — app.js */
-/* Based on "Dustur Al-Wahdah" by Sheikh Mohammed al-Ghazali (1917-1996) */
+/* دستور الوحدة الثقافية بين المسلمين — CHARTER OF CULTURAL UNITY — app.js v1.0 */
+/* Based on "Dustur al-Wahdah al-Thaqafiyah" by Sheikh Mohammed al-Ghazali (1917-1996) */
 
+// ═══════════════ TRILINGUAL DATA ═══════════════
 const T = {
   ar: {
     appTitle: 'دستور الوحدة الثقافية',
-    splashSub: 'نحو وحدة إسلامية قائمة على التنوع والتسامح',
+    splashSub: 'وحدة الأمة للنشء',
     splashHint: 'اضغط للتخطي',
-    sacredRef: 'سورة آل عمران ٣: ١٠٣',
-    tabHome: 'الرئيسية', tabCards: 'البطاقات', tabReflections: 'تأملات',
-    tabHabits: 'العادات', tabQuiz: 'اختبار', tabAbout: 'الكتاب',
-    cardsTitle: 'بطاقات الوحدة الثقافية',
-    cardsDesc: '٢٠ بطاقة من كتاب دستور الوحدة — كل بطاقة درس في بناء الأمة الواحدة',
-    reflectionsTitle: 'تأملات في الوحدة',
-    reflectionsDesc: 'تأملات قرآنية في الوحدة والتنوع والتسامح بين المسلمين',
-    habitsTitle: 'عاداتي اليومية', habitsDesc: 'عادات تبني الوحدة — تتبّع تقدمك يومياً',
-    quizTitle: 'اختبر فهمك', quizDesc: 'هل تفهم أسس الوحدة الإسلامية؟',
-    helpTitle: '❓ مساعدة', duaPanelTitle: '🤲 أدعية', resetBtn: 'إعادة تعيين اليوم',
-    submitQuiz: 'اعرف النتيجة', dailyLabel: '✨ فكرة اليوم', quizAgain: 'أعد الاختبار',
-    yes: 'نعم', no: 'لا', sometimes: 'أحياناً', share: 'مشاركة',
-    searchPlaceholder: 'ابحث في البطاقات...', streakMsg: 'يوم متتالي!', allDone: 'أحسنت! أكملت جميع العادات!',
-    splashFeatures: ['٢٠ بطاقة عن الوحدة الإسلامية','٦ تأملات قرآنية في التنوع والتسامح','عادات يومية لبناء الوحدة','اختبار ذاتي + أدعية'],
+    sacredRef: 'سورة الأنبياء ٩٢',
+    tabHome: 'الرئيسية', tabCards: 'الأركان', tabQuiz: 'المسابقة',
+    tabProgress: 'تقدمي', tabAbout: 'الكتاب',
+    cardsTitle: 'أركان الوحدة الثقافية',
+    cardsDesc: '١٥ ركيزة لوحدة المسلمين الثقافية من كتاب الشيخ محمد الغزالي — كل ركيزة بآية وحديث وتطبيق عملي',
+    quizTitle: '🏆 من سيصبح عالِماً؟',
+    quizDesc: 'اختبر معلوماتك عن وحدة المسلمين — ٤ خيارات لكل سؤال',
+    progressTitle: 'رحلتي نحو الوحدة',
+    progressDesc: 'تقدمك وإنجازاتك في رحلة الوحدة',
+    helpTitle: '❓ مساعدة',
+    duaPanelTitle: '🤲 أدعية الوحدة والأخوّة',
+    dailyLabel: '✨ ركيزة اليوم',
+    searchPlaceholder: 'ابحث في الأركان...',
+    share: 'مشاركة',
+    verse: 'الآية',
+    hadith: 'الحديث',
+    apply: '💡 طبّق الآن',
+    youngMode: '🌟 مستكشف صغير',
+    teenMode: '📖 باحث شاب',
+    xpLabel: 'نقاط الخبرة',
+    levelLabel: 'المستوى',
+    streakMsg: 'يوم متتالي!',
+    readMore: 'اقرأ المزيد',
+    nextQ: 'السؤال التالي',
+    lifeline5050: '50/50',
+    lifelineHint: '💡 تلميح',
+    lifelineQuran: '📖 مرجع قرآني',
+    correct: 'أحسنت! إجابة صحيحة! 🎉',
+    wrong: 'حاول مرة أخرى 💪',
+    quizComplete: 'انتهت المسابقة!',
+    score: 'النتيجة',
+    tryAgain: 'أعد المسابقة',
+    badge_beginner: 'مبتدئ',
+    badge_reader: 'قارئ',
+    badge_scholar: 'عالم',
+    badge_persistent: 'مثابر',
+    badge_expert: 'خبير',
+    splashFeatures: [
+      '١٥ ركيزة لوحدة المسلمين الثقافية',
+      'مسابقة "من سيصبح عالماً" بالمكافآت',
+      'نظام النقاط والشارات والمستويات',
+      'وضع مستكشف صغير ووضع باحث شاب'
+    ],
   },
   en: {
     appTitle: 'Charter of Cultural Unity',
-    splashSub: 'Toward Islamic unity built on diversity and tolerance',
+    splashSub: 'Unity of the Ummah for young minds',
     splashHint: 'tap to skip',
-    sacredRef: 'Surah Al-Imran 3:103',
-    tabHome: 'Home', tabCards: 'Cards', tabReflections: 'Reflect',
-    tabHabits: 'Habits', tabQuiz: 'Quiz', tabAbout: 'Book',
-    cardsTitle: 'Cards of Cultural Unity',
-    cardsDesc: '20 cards from the Charter of Unity — each card is a lesson in building one Ummah',
-    reflectionsTitle: 'Reflections on Unity',
-    reflectionsDesc: 'Quranic reflections on unity, diversity, and tolerance among Muslims',
-    habitsTitle: 'My Daily Habits', habitsDesc: 'Unity-building habits — track your daily progress',
-    quizTitle: 'Test Your Understanding', quizDesc: 'Do you understand the foundations of Islamic unity?',
-    helpTitle: '❓ Help', duaPanelTitle: '🤲 Duas', resetBtn: 'Reset Today',
-    submitQuiz: 'See Results', dailyLabel: '✨ Today\'s Insight', quizAgain: 'Retake Quiz',
-    yes: 'Yes', no: 'No', sometimes: 'Sometimes', share: 'Share',
-    searchPlaceholder: 'Search cards...', streakMsg: 'day streak!', allDone: 'Well done! All habits completed!',
-    splashFeatures: ['20 cards on Islamic unity','6 Quranic reflections on diversity','Daily unity-building habits','Self-quiz + duas'],
+    sacredRef: 'Surah Al-Anbiya 92',
+    tabHome: 'Home', tabCards: 'Pillars', tabQuiz: 'Quiz',
+    tabProgress: 'Progress', tabAbout: 'Book',
+    cardsTitle: 'Pillars of Cultural Unity',
+    cardsDesc: '15 pillars of Muslim cultural unity from Sheikh al-Ghazali — each with a verse, hadith, and practical application',
+    quizTitle: '🏆 Who Wants to Be a Scholar?',
+    quizDesc: 'Test your knowledge about Muslim unity — 4 choices per question',
+    progressTitle: 'My Unity Journey',
+    progressDesc: 'Your progress and achievements in the unity journey',
+    helpTitle: '❓ Help',
+    duaPanelTitle: '🤲 Duas for Unity & Brotherhood',
+    dailyLabel: "✨ Today's Pillar",
+    searchPlaceholder: 'Search pillars...',
+    share: 'Share',
+    verse: 'Verse',
+    hadith: 'Hadith',
+    apply: '💡 Apply Now',
+    youngMode: '🌟 Young Explorer',
+    teenMode: '📖 Teen Scholar',
+    xpLabel: 'Experience Points',
+    levelLabel: 'Level',
+    streakMsg: 'day streak!',
+    readMore: 'Read More',
+    nextQ: 'Next Question',
+    lifeline5050: '50/50',
+    lifelineHint: '💡 Hint',
+    lifelineQuran: '📖 Quran Ref',
+    correct: 'Well done! Correct answer! 🎉',
+    wrong: 'Try again next time 💪',
+    quizComplete: 'Quiz Complete!',
+    score: 'Score',
+    tryAgain: 'Retry Quiz',
+    badge_beginner: 'Beginner',
+    badge_reader: 'Reader',
+    badge_scholar: 'Scholar',
+    badge_persistent: 'Persistent',
+    badge_expert: 'Expert',
+    splashFeatures: [
+      '15 pillars of Muslim cultural unity',
+      '"Who Wants to Be a Scholar?" quiz with rewards',
+      'Points, badges, and level system',
+      'Young Explorer and Teen Scholar modes'
+    ],
   },
   fr: {
-    appTitle: 'Charte de l\'Unite Culturelle',
-    splashSub: 'Vers une unite islamique fondee sur la diversite et la tolerance',
+    appTitle: "Charte de l'Unite Culturelle",
+    splashSub: "L'unite de la Oumma pour les jeunes",
     splashHint: 'appuyez pour passer',
-    sacredRef: 'Sourate Al-Imran 3:103',
-    tabHome: 'Accueil', tabCards: 'Cartes', tabReflections: 'Reflexion',
-    tabHabits: 'Habitudes', tabQuiz: 'Quiz', tabAbout: 'Livre',
-    cardsTitle: 'Cartes de l\'Unite Culturelle',
-    cardsDesc: '20 cartes de la Charte de l\'Unite — chaque carte est une lecon pour construire une Oumma unie',
-    reflectionsTitle: 'Reflexions sur l\'Unite',
-    reflectionsDesc: 'Reflexions coraniques sur l\'unite, la diversite et la tolerance entre musulmans',
-    habitsTitle: 'Mes Habitudes Quotidiennes', habitsDesc: 'Habitudes pour l\'unite — suivez vos progres',
-    quizTitle: 'Testez Votre Comprehension', quizDesc: 'Comprenez-vous les fondements de l\'unite islamique ?',
-    helpTitle: '❓ Aide', duaPanelTitle: '🤲 Duas', resetBtn: 'Reinitialiser',
-    submitQuiz: 'Voir les Resultats', dailyLabel: '✨ Pensee du Jour', quizAgain: 'Refaire le Quiz',
-    yes: 'Oui', no: 'Non', sometimes: 'Parfois', share: 'Partager',
-    searchPlaceholder: 'Rechercher les cartes...', streakMsg: 'jours consecutifs !', allDone: 'Bravo ! Toutes les habitudes accomplies !',
-    splashFeatures: ['20 cartes sur l\'unite islamique','6 reflexions coraniques sur la diversite','Habitudes quotidiennes pour l\'unite','Quiz + duas'],
+    sacredRef: 'Sourate Al-Anbiya 92',
+    tabHome: 'Accueil', tabCards: 'Piliers', tabQuiz: 'Quiz',
+    tabProgress: 'Progres', tabAbout: 'Livre',
+    cardsTitle: "Piliers de l'Unite Culturelle",
+    cardsDesc: "15 piliers de l'unite culturelle musulmane du livre du Sheikh al-Ghazali — chacun avec un verset, un hadith et une application pratique",
+    quizTitle: '🏆 Qui Veut Devenir Savant ?',
+    quizDesc: "Testez vos connaissances sur l'unite musulmane — 4 choix par question",
+    progressTitle: 'Mon Parcours vers l\'Unite',
+    progressDesc: "Vos progres et realisations dans le parcours de l'unite",
+    helpTitle: '❓ Aide',
+    duaPanelTitle: '🤲 Duas pour l\'Unite et la Fraternite',
+    dailyLabel: '✨ Pilier du Jour',
+    searchPlaceholder: 'Rechercher les piliers...',
+    share: 'Partager',
+    verse: 'Verset',
+    hadith: 'Hadith',
+    apply: '💡 Appliquez Maintenant',
+    youngMode: '🌟 Jeune Explorateur',
+    teenMode: '📖 Jeune Chercheur',
+    xpLabel: "Points d'Experience",
+    levelLabel: 'Niveau',
+    streakMsg: 'jours consecutifs !',
+    readMore: 'Lire Plus',
+    nextQ: 'Question Suivante',
+    lifeline5050: '50/50',
+    lifelineHint: '💡 Indice',
+    lifelineQuran: '📖 Ref. Coran',
+    correct: 'Bravo ! Bonne reponse ! 🎉',
+    wrong: 'Reessayez la prochaine fois 💪',
+    quizComplete: 'Quiz Termine !',
+    score: 'Score',
+    tryAgain: 'Refaire le Quiz',
+    badge_beginner: 'Debutant',
+    badge_reader: 'Lecteur',
+    badge_scholar: 'Savant',
+    badge_persistent: 'Perseverant',
+    badge_expert: 'Expert',
+    splashFeatures: [
+      "15 piliers de l'unite culturelle musulmane",
+      'Quiz << Qui Veut Devenir Savant ? >> avec recompenses',
+      'Systeme de points, badges et niveaux',
+      'Modes Jeune Explorateur et Jeune Chercheur'
+    ],
   }
 };
 
+// ═══════════════ 15 PILLAR CARDS DATA ═══════════════
 const CARDS = [
-  {id:1,emoji:'🤝',ar:{title:'معنى الوحدة الثقافية',desc:'الوحدة الثقافية ليست توحيد الرأي بل توحيد الأصول والمبادئ مع احترام التنوع في الفروع. الأمة الواحدة تتسع للجميع.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',action:'تعرف على مذهب مختلف عن مذهبك — ابحث عن نقاط الاتفاق'},en:{title:'The Meaning of Cultural Unity',desc:'Cultural unity is not uniformity of opinion but unity of principles while respecting diversity in details. One Ummah can accommodate everyone.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',action:'Learn about a school of thought different from yours — look for common ground'},fr:{title:'Le Sens de l\'Unite Culturelle',desc:'L\'unite culturelle n\'est pas l\'uniformite d\'opinion mais l\'unite des principes tout en respectant la diversite dans les details.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',action:'Decouvrez une ecole de pensee differente de la votre'}},
-  {id:2,emoji:'📖',ar:{title:'القرآن دستور الوحدة',desc:'القرآن الكريم هو الدستور الجامع لكل المسلمين. لا فرق بين سني وشيعي في إيمانه بالقرآن. هو الأساس المشترك.',verse:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ',action:'اقرأ آية اليوم وتأمل كيف تجمع المسلمين'},en:{title:'The Quran: Constitution of Unity',desc:'The Holy Quran is the unifying constitution for all Muslims. There is no difference in belief in the Quran. It is the common foundation.',verse:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ',action:'Read a verse today and reflect on how it unites Muslims'},fr:{title:'Le Coran : Constitution de l\'Unite',desc:'Le Saint Coran est la constitution unificatrice de tous les musulmans. Il n\'y a pas de difference dans la croyance au Coran. C\'est le fondement commun.',verse:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ',action:'Lisez un verset aujourd\'hui et reflechissez a comment il unit les musulmans'}},
-  {id:3,emoji:'🕌',ar:{title:'أركان الإسلام تجمعنا',desc:'الشهادتان والصلاة والزكاة والصوم والحج — أركان متفق عليها بين جميع المسلمين بلا استثناء.',verse:'وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ',action:'صلِّ اليوم في مسجد لا تعتاد الصلاة فيه — الإسلام أوسع من جماعتك'},en:{title:'The Pillars of Islam Unite Us',desc:'The testimony of faith, prayer, charity, fasting, and pilgrimage — pillars agreed upon by all Muslims without exception.',verse:'وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ',action:'Pray today in a mosque you don\'t usually attend — Islam is bigger than your group'},fr:{title:'Les Piliers de l\'Islam Nous Unissent',desc:'L\'attestation de foi, la priere, l\'aumone, le jeune et le pelerinage — des piliers agrees par tous les musulmans sans exception.',verse:'وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ',action:'Priez aujourd\'hui dans une mosquee que vous ne frequentez pas habituellement'}},
-  {id:4,emoji:'🌍',ar:{title:'التنوع في الفروع رحمة',desc:'اختلاف المذاهب الفقهية في الفروع ليس شراً بل رحمة. الاختلاف الفقهي يعطي مرونة للأمة ويناسب ظروف الزمان والمكان.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً',action:'عندما تسمع رأياً فقهياً مختلفاً، لا ترفضه فوراً — ابحث عن دليله'},en:{title:'Diversity in Details Is Mercy',desc:'Differences among jurisprudential schools in details are not evil but mercy. Jurisprudential diversity gives the Ummah flexibility for different times and places.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً',action:'When you hear a different juristic opinion, don\'t reject it immediately — look for its evidence'},fr:{title:'La Diversite dans les Details Est une Misericorde',desc:'Les differences entre ecoles juridiques dans les details ne sont pas un mal mais une misericorde. La diversite juridique donne a l\'Oumma de la flexibilite.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً',action:'Quand vous entendez un avis juridique different, ne le rejetez pas — cherchez sa preuve'}},
-  {id:5,emoji:'⚔️',ar:{title:'خطر التعصب المذهبي',desc:'التعصب لمذهب بعينه يمزق الأمة ويحول المسلمين إلى فرق متناحرة. الولاء يجب أن يكون للإسلام لا لمذهب.',verse:'إِنَّ الَّذِينَ فَرَّقُوا دِينَهُمْ وَكَانُوا شِيَعًا لَّسْتَ مِنْهُمْ فِي شَيْءٍ',action:'راجع موقفك من المذاهب الأخرى — هل أنت منصف أم متعصب؟'},en:{title:'The Danger of Sectarian Fanaticism',desc:'Fanaticism for a specific school tears the Ummah apart and turns Muslims into warring factions. Loyalty must be to Islam, not to a school.',verse:'إِنَّ الَّذِينَ فَرَّقُوا دِينَهُمْ وَكَانُوا شِيَعًا لَّسْتَ مِنْهُمْ فِي شَيْءٍ',action:'Review your stance toward other schools — are you fair or fanatical?'},fr:{title:'Le Danger du Fanatisme Sectaire',desc:'Le fanatisme pour une ecole specifique dechire l\'Oumma et transforme les musulmans en factions rivales. La loyaute doit etre envers l\'Islam, pas une ecole.',verse:'إِنَّ الَّذِينَ فَرَّقُوا دِينَهُمْ وَكَانُوا شِيَعًا لَّسْتَ مِنْهُمْ فِي شَيْءٍ',action:'Revoyez votre position envers les autres ecoles — etes-vous equitable ou fanatique ?'}},
-  {id:6,emoji:'🔗',ar:{title:'وحدة العقيدة',desc:'جميع المسلمين يؤمنون بالله وملائكته وكتبه ورسله واليوم الآخر والقدر. هذا الإيمان المشترك أقوى من أي خلاف فقهي.',verse:'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ',action:'ذكّر نفسك اليوم بأصول الإيمان المشتركة بين المسلمين'},en:{title:'Unity of Creed',desc:'All Muslims believe in God, His angels, books, messengers, the Last Day, and divine decree. This shared faith is stronger than any jurisprudential disagreement.',verse:'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ',action:'Remind yourself today of the shared foundations of faith among Muslims'},fr:{title:'Unite de la Croyance',desc:'Tous les musulmans croient en Dieu, Ses anges, Ses livres, Ses messagers, le Jour Dernier et le destin divin. Cette foi partagee est plus forte que tout desaccord juridique.',verse:'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ',action:'Rappelez-vous aujourd\'hui les fondements communs de la foi entre musulmans'}},
-  {id:7,emoji:'💬',ar:{title:'أدب الاختلاف',desc:'الاختلاف في الرأي لا يفسد للود قضية. الأئمة الأربعة اختلفوا واحترم كل منهم الآخر. هذا هو الأدب الإسلامي.',verse:'وَجَادِلْهُم بِالَّتِي هِيَ أَحْسَنُ',action:'إذا اختلفت مع أحد اليوم، حاور بأدب واحترم رأيه'},en:{title:'The Etiquette of Disagreement',desc:'Differences of opinion should not ruin friendships. The four Imams disagreed yet respected each other. This is Islamic etiquette.',verse:'وَجَادِلْهُم بِالَّتِي هِيَ أَحْسَنُ',action:'If you disagree with someone today, discuss with courtesy and respect their opinion'},fr:{title:'L\'Etiquette du Desaccord',desc:'Les differences d\'opinion ne devraient pas ruiner les amities. Les quatre Imams etaient en desaccord mais se respectaient mutuellement.',verse:'وَجَادِلْهُم بِالَّتِي هِيَ أَحْسَنُ',action:'Si vous etes en desaccord avec quelqu\'un aujourd\'hui, discutez avec courtoisie'}},
-  {id:8,emoji:'🏛️',ar:{title:'التراث الإسلامي المشترك',desc:'التراث العلمي والحضاري للأمة الإسلامية ملك لجميع المسلمين. لا يحق لفئة أن تحتكره أو تدّعي أنها وحدها تمثل الإسلام.',verse:'كُنتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ',action:'اقرأ عن عالم إسلامي من مذهب أو بلد مختلف عنك'},en:{title:'Shared Islamic Heritage',desc:'The scientific and civilizational heritage of the Islamic Ummah belongs to all Muslims. No group has the right to monopolize it or claim it alone represents Islam.',verse:'كُنتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ',action:'Read about an Islamic scholar from a different school or country than yours'},fr:{title:'Patrimoine Islamique Partage',desc:'Le patrimoine scientifique et civilisationnel de l\'Oumma islamique appartient a tous les musulmans. Aucun groupe n\'a le droit de le monopoliser.',verse:'كُنتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ',action:'Lisez sur un savant islamique d\'une ecole ou d\'un pays different du votre'}},
-  {id:9,emoji:'🛡️',ar:{title:'العدو المشترك',desc:'أعداء الأمة لا يفرقون بين سني وشيعي. التفرق يضعف الأمة ويجعلها لقمة سائغة. الوحدة قوة والتفرق ضعف.',verse:'وَلَا تَنَازَعُوا فَتَفْشَلُوا وَتَذْهَبَ رِيحُكُمْ',action:'بدلاً من انتقاد فئة إسلامية أخرى، وجّه طاقتك لمواجهة التحديات الحقيقية'},en:{title:'The Common Enemy',desc:'The Ummah\'s enemies do not distinguish between Sunni and Shia. Division weakens the Ummah. Unity is strength and division is weakness.',verse:'وَلَا تَنَازَعُوا فَتَفْشَلُوا وَتَذْهَبَ رِيحُكُمْ',action:'Instead of criticizing another Islamic group, direct your energy toward real challenges'},fr:{title:'L\'Ennemi Commun',desc:'Les ennemis de l\'Oumma ne font pas de difference entre Sunnite et Chiite. La division affaiblit l\'Oumma. L\'unite est force et la division est faiblesse.',verse:'وَلَا تَنَازَعُوا فَتَفْشَلُوا وَتَذْهَبَ رِيحُكُمْ',action:'Au lieu de critiquer un autre groupe islamique, dirigez votre energie vers les vrais defis'}},
-  {id:10,emoji:'📚',ar:{title:'العلم يوحّد',desc:'العلم الصحيح يقرّب بين المسلمين. الجهل هو المصدر الأول للتعصب والانقسام. كلما زاد علمك اتسع أفقك.',verse:'هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ',action:'تعلم شيئاً جديداً اليوم عن الإسلام من مصدر موثوق'},en:{title:'Knowledge Unites',desc:'True knowledge brings Muslims closer. Ignorance is the primary source of fanaticism and division. The more you learn, the broader your horizons.',verse:'هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ',action:'Learn something new about Islam today from a trusted source'},fr:{title:'Le Savoir Unit',desc:'Le vrai savoir rapproche les musulmans. L\'ignorance est la source premiere du fanatisme et de la division. Plus vous apprenez, plus vos horizons s\'elargissent.',verse:'هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ',action:'Apprenez quelque chose de nouveau sur l\'Islam aujourd\'hui'}},
-  {id:11,emoji:'🌐',ar:{title:'الإسلام دين عالمي',desc:'الإسلام ليس ملكاً لقومية أو عرق. هو دين عالمي يتسع لكل الثقافات واللغات. العربي والعجمي سواء في الإسلام.',verse:'يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ',action:'تواصل مع مسلم من ثقافة مختلفة عن ثقافتك'},en:{title:'Islam Is a Global Religion',desc:'Islam does not belong to a nationality or race. It is a global religion that accommodates all cultures and languages. Arab and non-Arab are equal in Islam.',verse:'يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ',action:'Connect with a Muslim from a different cultural background'},fr:{title:'L\'Islam Est une Religion Mondiale',desc:'L\'Islam n\'appartient pas a une nationalite ou une race. C\'est une religion mondiale qui accueille toutes les cultures et langues.',verse:'يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ',action:'Connectez-vous avec un musulman d\'un contexte culturel different'}},
-  {id:12,emoji:'⚖️',ar:{title:'العدل أساس الوحدة',desc:'لا وحدة بدون عدل. الظلم يفرّق الأمة ويولّد الكراهية. العدل يجمع القلوب حتى لو اختلفت العقول.',verse:'إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ',action:'كن عادلاً في حكمك على الآخرين اليوم — حتى من تختلف معهم'},en:{title:'Justice Is the Foundation of Unity',desc:'There is no unity without justice. Oppression divides the Ummah and breeds hatred. Justice unites hearts even when minds differ.',verse:'إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ',action:'Be just in your judgment of others today — even those you disagree with'},fr:{title:'La Justice Est le Fondement de l\'Unite',desc:'Il n\'y a pas d\'unite sans justice. L\'oppression divise l\'Oumma et engendre la haine. La justice unit les coeurs meme quand les esprits different.',verse:'إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ',action:'Soyez juste dans votre jugement des autres aujourd\'hui'}},
-  {id:13,emoji:'🤲',ar:{title:'الأخوة الإسلامية',desc:'المسلمون إخوة بنص القرآن. الأخوة الإسلامية أقوى من رابطة الدم والقومية واللغة.',verse:'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ',action:'اتصل بأخ مسلم لم تتواصل معه منذ فترة — جدد الأخوة'},en:{title:'Islamic Brotherhood',desc:'Muslims are brothers by the text of the Quran. Islamic brotherhood is stronger than bonds of blood, nationality, and language.',verse:'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ',action:'Call a Muslim brother you haven\'t contacted in a while — renew the brotherhood'},fr:{title:'La Fraternite Islamique',desc:'Les musulmans sont freres par le texte du Coran. La fraternite islamique est plus forte que les liens du sang, de la nationalite et de la langue.',verse:'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ',action:'Appelez un frere musulman que vous n\'avez pas contacte depuis longtemps'}},
-  {id:14,emoji:'🎯',ar:{title:'أولويات الأمة',desc:'الأمة بحاجة لترتيب أولوياتها: محاربة الجهل والفقر والمرض أولى من الخلافات المذهبية. القضايا الكبرى تنتظر.',verse:'وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ',action:'فكر في قضية إسلامية كبرى يمكنك المساهمة فيها'},en:{title:'The Ummah\'s Priorities',desc:'The Ummah needs to prioritize: fighting ignorance, poverty, and disease is more important than sectarian disputes. Major issues await.',verse:'وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ',action:'Think of a major Islamic cause you can contribute to'},fr:{title:'Les Priorites de l\'Oumma',desc:'L\'Oumma doit prioriser : combattre l\'ignorance, la pauvrete et la maladie est plus important que les disputes sectaires.',verse:'وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ',action:'Pensez a une grande cause islamique a laquelle vous pouvez contribuer'}},
-  {id:15,emoji:'🌱',ar:{title:'التجديد لا التبديل',desc:'الوحدة تحتاج تجديداً في الفهم لا تبديلاً في الدين. نحتاج فهماً معاصراً للنصوص مع الحفاظ على الثوابت.',verse:'ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ',action:'اقرأ تفسيراً معاصراً لآية من القرآن اليوم'},en:{title:'Renewal Not Replacement',desc:'Unity needs renewal in understanding, not replacement of religion. We need contemporary understanding of texts while preserving fundamentals.',verse:'ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ',action:'Read a contemporary interpretation of a Quranic verse today'},fr:{title:'Renouveau et Non Remplacement',desc:'L\'unite necessite un renouveau dans la comprehension, pas un remplacement de la religion. Nous avons besoin d\'une comprehension contemporaine des textes.',verse:'ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ',action:'Lisez une interpretation contemporaine d\'un verset coranique aujourd\'hui'}},
-  {id:16,emoji:'🏫',ar:{title:'دور التعليم في الوحدة',desc:'المناهج التعليمية يجب أن تربي على احترام التنوع لا التعصب. التعليم هو السلاح الأقوى لبناء أجيال موحدة.',verse:'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ',action:'علّم طفلاً اليوم قيمة احترام الاختلاف'},en:{title:'Education\'s Role in Unity',desc:'Educational curricula should teach respect for diversity, not fanaticism. Education is the strongest weapon for building united generations.',verse:'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ',action:'Teach a child today the value of respecting differences'},fr:{title:'Le Role de l\'Education dans l\'Unite',desc:'Les programmes educatifs doivent enseigner le respect de la diversite, pas le fanatisme. L\'education est l\'arme la plus forte pour construire des generations unies.',verse:'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ',action:'Enseignez a un enfant aujourd\'hui la valeur du respect des differences'}},
-  {id:17,emoji:'💡',ar:{title:'الحوار لا الصدام',desc:'الحوار هو الطريق للوحدة. الصدام لا يولّد إلا العداوة. حاور من يختلف معك بعلم وأدب.',verse:'وَلَا تُجَادِلُوا أَهْلَ الْكِتَابِ إِلَّا بِالَّتِي هِيَ أَحْسَنُ',action:'حاور شخصاً يختلف معك في رأي فقهي — بأدب وعلم'},en:{title:'Dialogue Not Clash',desc:'Dialogue is the path to unity. Clashing only breeds enmity. Discuss with those who differ from you with knowledge and courtesy.',verse:'وَلَا تُجَادِلُوا أَهْلَ الْكِتَابِ إِلَّا بِالَّتِي هِيَ أَحْسَنُ',action:'Have a respectful dialogue with someone who holds a different juristic view'},fr:{title:'Dialogue et Non Affrontement',desc:'Le dialogue est le chemin vers l\'unite. L\'affrontement ne produit que l\'inimitie. Discutez avec ceux qui different de vous avec savoir et courtoisie.',verse:'وَلَا تُجَادِلُوا أَهْلَ الْكِتَابِ إِلَّا بِالَّتِي هِيَ أَحْسَنُ',action:'Ayez un dialogue respectueux avec quelqu\'un qui a un avis juridique different'}},
-  {id:18,emoji:'❤️',ar:{title:'المحبة أساس الدين',desc:'المحبة في الله أساس الدين وأقوى رابطة بين المسلمين. من أحب أخاه في الله فقد بنى جسراً لا ينهدم.',verse:'لَا تَدْخُلُوا الْجَنَّةَ حَتَّىٰ تُؤْمِنُوا وَلَا تُؤْمِنُوا حَتَّىٰ تَحَابُّوا',action:'عبّر عن محبتك لأخ مسلم اليوم — "إني أحبك في الله"'},en:{title:'Love Is the Foundation of Faith',desc:'Love for God\'s sake is the foundation of religion and the strongest bond between Muslims. Whoever loves their brother for God\'s sake has built an unbreakable bridge.',verse:'لَا تَدْخُلُوا الْجَنَّةَ حَتَّىٰ تُؤْمِنُوا وَلَا تُؤْمِنُوا حَتَّىٰ تَحَابُّوا',action:'Express your love to a Muslim brother today — "I love you for God\'s sake"'},fr:{title:'L\'Amour Est le Fondement de la Foi',desc:'L\'amour en Dieu est le fondement de la religion et le lien le plus fort entre musulmans.',verse:'لَا تَدْخُلُوا الْجَنَّةَ حَتَّىٰ تُؤْمِنُوا وَلَا تُؤْمِنُوا حَتَّىٰ تَحَابُّوا',action:'Exprimez votre amour a un frere musulman aujourd\'hui'}},
-  {id:19,emoji:'🌍',ar:{title:'الأمة بين القومية والإسلام',desc:'القومية فرّقت المسلمين إلى دول متنافسة. الهوية الإسلامية أعلى من كل هوية قومية أو عرقية.',verse:'إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ',action:'لا تحكم على أحد بجنسيته أو لونه — احكم بتقواه'},en:{title:'The Ummah Between Nationalism and Islam',desc:'Nationalism has divided Muslims into competing states. Islamic identity is higher than any national or ethnic identity.',verse:'إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ',action:'Don\'t judge anyone by their nationality or color — judge by their piety'},fr:{title:'L\'Oumma entre Nationalisme et Islam',desc:'Le nationalisme a divise les musulmans en Etats concurrents. L\'identite islamique est superieure a toute identite nationale ou ethnique.',verse:'إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ',action:'Ne jugez personne par sa nationalite ou sa couleur — jugez par sa piete'}},
-  {id:20,emoji:'🕌',ar:{title:'خاتمة: الوحدة فريضة',desc:'الوحدة ليست خياراً بل فريضة إسلامية. الله أمر بها والنبي ﷺ عمل من أجلها. كل مسلم مسؤول عن بناء الوحدة.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',action:'ابدأ اليوم بخطوة واحدة نحو الوحدة — سامح، حاور، وتعلّم'},en:{title:'Conclusion: Unity Is an Obligation',desc:'Unity is not a choice but an Islamic obligation. God commanded it and the Prophet (peace be upon him) worked for it. Every Muslim is responsible for building unity.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',action:'Start today with one step toward unity — forgive, dialogue, and learn'},fr:{title:'Conclusion : L\'Unite Est une Obligation',desc:'L\'unite n\'est pas un choix mais une obligation islamique. Dieu l\'a ordonnee et le Prophete (paix sur lui) a travaille pour elle.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',action:'Commencez aujourd\'hui par un pas vers l\'unite — pardonnez, dialoguez et apprenez'}}
+  {
+    id:1, emoji:'🕌',
+    ar:{title:'العقيدة المشتركة',desc:'الشهادتان هما الأساس الجامع لكل المسلمين على اختلاف مذاهبهم وأعراقهم. لا إله إلا الله محمد رسول الله هي الرابطة التي توحّد مليار ونصف مسلم من مشارق الأرض ومغاربها.',verse:'إِنَّ هَذِهِ أُمَّتُكُمْ أُمَّةً وَاحِدَةً وَأَنَا رَبُّكُمْ فَاعْبُدُونِ',verseRef:'الأنبياء ٩٢',hadith:'بُني الإسلام على خمس: شهادة أن لا إله إلا الله وأن محمداً رسول الله — متفق عليه',action:'تذكّر اليوم أن كل من نطق الشهادتين هو أخوك في الدين مهما اختلفت جنسيته',young:'كلنا مسلمون! نقول "لا إله إلا الله" معاً — وهذا يجعلنا عائلة واحدة كبيرة 🕌'},
+    en:{title:'Shared Creed',desc:'The two testimonies of faith (Shahada) are the foundation uniting all Muslims regardless of their schools of thought or ethnicities. There is no god but Allah and Muhammad is His Messenger — this bond unites 1.5 billion Muslims worldwide.',verse:'This community of yours is one community and I am your Lord, so worship Me',verseRef:'Al-Anbiya 92',hadith:'Islam is built upon five pillars: the testimony that there is no god but Allah and Muhammad is His Messenger — Agreed upon',action:'Remember today that everyone who says the Shahada is your brother or sister in faith, regardless of nationality',young:'We are all Muslims! We say "There is no god but Allah" together — and that makes us one big family 🕌'},
+    fr:{title:'Le Credo Commun',desc:'Les deux attestations de foi (Shahada) sont le fondement unissant tous les musulmans quelles que soient leurs ecoles de pensee ou ethnicites. Il n\'y a de dieu qu\'Allah et Muhammad est Son Messager — ce lien unit 1,5 milliard de musulmans dans le monde.',verse:'Cette communaute qui est la votre est une communaute unique et Je suis votre Seigneur',verseRef:'Al-Anbiya 92',hadith:'L\'Islam est bati sur cinq piliers : l\'attestation qu\'il n\'y a de dieu qu\'Allah et que Muhammad est Son Messager — Unanimement reconnu',action:'Rappelez-vous aujourd\'hui que quiconque prononce la Shahada est votre frere ou soeur dans la foi',young:'Nous sommes tous musulmans ! Nous disons "Il n\'y a de dieu qu\'Allah" ensemble — et cela fait de nous une grande famille 🕌'}
+  },
+  {
+    id:2, emoji:'📖',
+    ar:{title:'القرآن الموحِّد',desc:'القرآن الكريم هو الكتاب الواحد الذي يقرأه كل المسلمين بنفس اللفظ العربي. لا يختلف حرف واحد في مصاحف المسلمين من جاكرتا إلى الرباط. هذا الكتاب هو الميثاق الثقافي الأول.',verse:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ',verseRef:'الحجر ٩',hadith:'خيركم من تعلّم القرآن وعلّمه — رواه البخاري',action:'اقرأ صفحة من القرآن اليوم وتأمل كيف يقرأها مسلم في أقصى الأرض بنفس النطق',young:'القرآن كتابنا الواحد! كل المسلمين في العالم يقرأون نفس الكلمات بنفس اللغة 📖'},
+    en:{title:'The Quran as Unifier',desc:'The Holy Quran is the single book read by all Muslims in the same Arabic wording. Not a single letter differs in the copies of the Quran from Jakarta to Rabat. This book is the first cultural charter binding the Ummah.',verse:'Indeed, it is We who sent down the Reminder and indeed, We will be its guardian',verseRef:'Al-Hijr 9',hadith:'The best among you are those who learn the Quran and teach it — Bukhari',action:'Read a page of the Quran today and reflect on how a Muslim at the other end of the world reads the exact same words',young:'The Quran is our one book! Every Muslim in the world reads the same words in the same language 📖'},
+    fr:{title:'Le Coran Unificateur',desc:'Le Saint Coran est le livre unique lu par tous les musulmans avec les memes mots arabes. Pas une seule lettre ne differe dans les exemplaires du Coran de Jakarta a Rabat. Ce livre est la premiere charte culturelle liant la Oumma.',verse:'C\'est Nous qui avons fait descendre le Rappel et c\'est Nous qui en sommes les gardiens',verseRef:'Al-Hijr 9',hadith:'Les meilleurs d\'entre vous sont ceux qui apprennent le Coran et l\'enseignent — Bukhari',action:'Lisez une page du Coran aujourd\'hui et reflechissez a comment un musulman a l\'autre bout du monde lit les memes mots',young:'Le Coran est notre livre unique ! Chaque musulman dans le monde lit les memes mots dans la meme langue 📖'}
+  },
+  {
+    id:3, emoji:'🤝',
+    ar:{title:'اختلاف الفقه رحمة',desc:'تعدد المذاهب الفقهية ليس تفرقاً بل ثراء. الإمام أبو حنيفة ومالك والشافعي وأحمد كلهم اجتهدوا من نفس المصادر. الاختلاف في الفروع طبيعي ما دامت الأصول واحدة.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً وَلَا يَزَالُونَ مُخْتَلِفِينَ',verseRef:'هود ١١٨',hadith:'إذا حكم الحاكم فاجتهد ثم أصاب فله أجران وإذا أخطأ فله أجر — متفق عليه',action:'تعلّم اليوم عن مذهب فقهي غير مذهبك واكتشف حكمته',young:'المذاهب مثل الألوان — كلها جميلة وكلها إسلام! التنوع يجعلنا أغنى 🌈'},
+    en:{title:'Diversity in Fiqh is Mercy',desc:'The plurality of legal schools is not division but richness. Imams Abu Hanifa, Malik, Shafi\'i, and Ahmad all derived rulings from the same sources. Differences in branches are natural as long as the fundamentals remain united.',verse:'If your Lord had willed, He would have made mankind one nation; but they will not cease to differ',verseRef:'Hud 118',hadith:'If a judge makes a ruling and is correct, they receive two rewards; if wrong, one reward — Agreed upon',action:'Learn today about a school of thought different from yours and discover its wisdom',young:'Schools of thought are like colors — all beautiful and all Islam! Diversity makes us richer 🌈'},
+    fr:{title:'La Diversite du Fiqh est Misericorde',desc:'La pluralite des ecoles juridiques n\'est pas une division mais une richesse. Les Imams Abu Hanifa, Malik, Shafi\'i et Ahmad ont tous derive leurs jugements des memes sources. Les differences dans les branches sont naturelles tant que les fondements restent unis.',verse:'Si ton Seigneur l\'avait voulu, Il aurait fait des gens une seule communaute ; mais ils ne cessent d\'etre en desaccord',verseRef:'Hud 118',hadith:'Si un juge rend un verdict et a raison, il recoit deux recompenses ; s\'il se trompe, une recompense — Unanimement reconnu',action:'Apprenez aujourd\'hui sur une ecole de pensee differente de la votre et decouvrez sa sagesse',young:'Les ecoles de pensee sont comme les couleurs — toutes belles et toutes Islam ! La diversite nous enrichit 🌈'}
+  },
+  {
+    id:4, emoji:'🚫',
+    ar:{title:'رفض الطائفية',desc:'التعصب المذهبي مرض يفتك بالأمة. الشيخ الغزالي يحذر من تكفير المسلمين بعضهم بعضاً. الطائفية سلاح في يد أعداء الأمة يستخدمونه لتفريقها وإضعافها.',verse:'وَلَا تَكُونُوا كَالَّذِينَ تَفَرَّقُوا وَاخْتَلَفُوا مِنْ بَعْدِ مَا جَاءَهُمُ الْبَيِّنَاتُ',verseRef:'آل عمران ١٠٥',hadith:'لا ترجعوا بعدي كفاراً يضرب بعضكم رقاب بعض — متفق عليه',action:'إذا سمعت كلاماً طائفياً اليوم ارفضه بأدب وذكّر بأن المسلمين إخوة',young:'لا تكره أحداً لأنه من مذهب مختلف! كلنا مسلمون وكلنا إخوة 🚫'},
+    en:{title:'Rejecting Sectarianism',desc:'Sectarian fanaticism is a disease that destroys the Ummah. Sheikh al-Ghazali warns against Muslims declaring each other disbelievers. Sectarianism is a weapon in the hands of the Ummah\'s enemies used to divide and weaken it.',verse:'And do not be like those who became divided and differed after clear proofs had come to them',verseRef:'Al Imran 105',hadith:'Do not return after me to disbelief, striking the necks of one another — Agreed upon',action:'If you hear sectarian talk today, politely reject it and remind others that Muslims are brothers',young:'Don\'t dislike anyone because they follow a different school! We are all Muslims and all siblings 🚫'},
+    fr:{title:'Rejeter le Sectarisme',desc:'Le fanatisme sectaire est une maladie qui detruit la Oumma. Le Sheikh al-Ghazali met en garde contre les musulmans qui se declarent mutuellement mecreants. Le sectarisme est une arme dans les mains des ennemis de la Oumma.',verse:'Et ne soyez pas comme ceux qui se sont divises et qui ont diverge apres que les preuves claires leur furent venues',verseRef:'Al Imran 105',hadith:'Ne revenez pas apres moi a la mecreance en vous frappant les uns les autres — Unanimement reconnu',action:'Si vous entendez des propos sectaires aujourd\'hui, refusez-les poliment et rappelez que les musulmans sont freres',young:'N\'aime pas moins quelqu\'un parce qu\'il suit une ecole differente ! Nous sommes tous musulmans et tous freres 🚫'}
+  },
+  {
+    id:5, emoji:'🛡️',
+    ar:{title:'وعي العدو المشترك',desc:'الأمة الإسلامية تواجه تحديات مشتركة من الاستعمار الثقافي والغزو الفكري. الوعي بهذه التحديات يوحّد الصفوف. لا يجوز أن نتقاتل فيما بيننا والعدو يتربص بنا جميعاً.',verse:'وَالَّذِينَ كَفَرُوا بَعْضُهُمْ أَوْلِيَاءُ بَعْضٍ إِلَّا تَفْعَلُوهُ تَكُنْ فِتْنَةٌ فِي الْأَرْضِ وَفَسَادٌ كَبِيرٌ',verseRef:'الأنفال ٧٣',hadith:'المؤمن للمؤمن كالبنيان يشدّ بعضه بعضاً — متفق عليه',action:'اقرأ اليوم عن تحدٍّ يواجه المسلمين في بلد آخر وفكّر كيف يمكنك المساعدة',young:'نحن مثل فريق واحد! عندما نتعاون معاً لا يستطيع أحد هزيمتنا 🛡️'},
+    en:{title:'Common Challenge Awareness',desc:'The Muslim Ummah faces shared challenges from cultural colonialism and intellectual invasion. Awareness of these challenges unites the ranks. We must not fight among ourselves while external threats target us all.',verse:'Those who disbelieve are allies of one another. If you do not do the same, there will be fitnah on earth and great corruption',verseRef:'Al-Anfal 73',hadith:'The believer to the believer is like a building, each part strengthens the other — Agreed upon',action:'Read today about a challenge facing Muslims in another country and think how you can help',young:'We are like one team! When we work together, nobody can defeat us 🛡️'},
+    fr:{title:'Conscience du Defi Commun',desc:'La Oumma musulmane fait face a des defis communs du colonialisme culturel et de l\'invasion intellectuelle. La conscience de ces defis unit les rangs. Nous ne devons pas nous battre entre nous alors que des menaces exterieures nous ciblent tous.',verse:'Ceux qui ont mecru sont allies les uns des autres. Si vous ne le faites pas, il y aura une fitna sur terre et un grand desordre',verseRef:'Al-Anfal 73',hadith:'Le croyant pour le croyant est comme une construction dont chaque partie renforce l\'autre — Unanimement reconnu',action:'Lisez aujourd\'hui sur un defi auquel font face les musulmans dans un autre pays et reflechissez a comment vous pouvez aider',young:'Nous sommes comme une seule equipe ! Quand nous travaillons ensemble, personne ne peut nous vaincre 🛡️'}
+  },
+  {
+    id:6, emoji:'📜',
+    ar:{title:'التاريخ المشترك',desc:'يتقاسم المسلمون تاريخاً مجيداً يمتد أكثر من ١٤ قرناً. من فتح مكة إلى الأندلس إلى بغداد، هذا التاريخ المشترك هو مصدر فخر وقوة يجمع الأمة حول هوية واحدة.',verse:'كُنْتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ',verseRef:'آل عمران ١١٠',hadith:'من لم يهتم بأمر المسلمين فليس منهم — رواه الطبراني',action:'اقرأ اليوم عن شخصية إسلامية عظيمة من بلد مختلف عن بلدك',young:'تاريخنا مليء بالأبطال من كل مكان! اكتشف بطلاً مسلماً جديداً اليوم 📜'},
+    en:{title:'Shared History',desc:'Muslims share a glorious history spanning over 14 centuries. From the conquest of Makkah to Andalusia to Baghdad, this shared history is a source of pride and strength uniting the Ummah around one identity.',verse:'You are the best community produced for mankind',verseRef:'Al Imran 110',hadith:'Whoever does not concern himself with the affairs of Muslims is not one of them — Tabarani',action:'Read today about a great Islamic figure from a country different from yours',young:'Our history is full of heroes from everywhere! Discover a new Muslim hero today 📜'},
+    fr:{title:'L\'Histoire Commune',desc:'Les musulmans partagent une histoire glorieuse s\'etendant sur plus de 14 siecles. De la conquete de La Mecque a l\'Andalousie a Bagdad, cette histoire commune est une source de fierte et de force unissant la Oumma autour d\'une seule identite.',verse:'Vous etes la meilleure communaute suscitee pour les gens',verseRef:'Al Imran 110',hadith:'Quiconque ne se soucie pas des affaires des musulmans n\'est pas des leurs — Tabarani',action:'Lisez aujourd\'hui sur une grande figure islamique d\'un pays different du votre',young:'Notre histoire est pleine de heros de partout ! Decouvrez un nouveau heros musulman aujourd\'hui 📜'}
+  },
+  {
+    id:7, emoji:'🗣️',
+    ar:{title:'العربية جسر التواصل',desc:'اللغة العربية هي لغة القرآن والعبادة والعلم الإسلامي. تعلّمها يتيح لكل مسلم فهم مصادره مباشرة. العربية ليست ملكاً للعرب بل هي لغة الإسلام المشتركة.',verse:'إِنَّا أَنْزَلْنَاهُ قُرْآنًا عَرَبِيًّا لَعَلَّكُمْ تَعْقِلُونَ',verseRef:'يوسف ٢',hadith:'أحبوا العرب لثلاث: لأني عربي، والقرآن عربي، وكلام أهل الجنة عربي — رواه الطبراني',action:'تعلّم ثلاث كلمات عربية جديدة اليوم إذا لم تكن العربية لغتك الأم',young:'العربية لغة جميلة! تعلّم كلمة جديدة كل يوم — ستفهم القرآن أفضل 🗣️'},
+    en:{title:'Arabic as a Bridge',desc:'The Arabic language is the language of the Quran, worship, and Islamic scholarship. Learning it allows every Muslim to understand their sources directly. Arabic does not belong to Arabs alone — it is the shared language of Islam.',verse:'Indeed, We have sent it down as an Arabic Quran so that you might understand',verseRef:'Yusuf 2',hadith:'Love the Arabs for three reasons: because I am Arab, the Quran is Arabic, and the speech of the people of Paradise is Arabic — Tabarani',action:'Learn three new Arabic words today if Arabic is not your mother tongue',young:'Arabic is a beautiful language! Learn a new word every day — you will understand the Quran better 🗣️'},
+    fr:{title:'L\'Arabe comme Pont',desc:'La langue arabe est la langue du Coran, du culte et du savoir islamique. Son apprentissage permet a chaque musulman de comprendre directement ses sources. L\'arabe n\'appartient pas aux Arabes seuls — c\'est la langue commune de l\'Islam.',verse:'Nous l\'avons fait descendre en un Coran arabe afin que vous raisonniez',verseRef:'Yusuf 2',hadith:'Aimez les Arabes pour trois raisons : car je suis arabe, le Coran est arabe, et la langue des gens du Paradis est arabe — Tabarani',action:'Apprenez trois nouveaux mots arabes aujourd\'hui si l\'arabe n\'est pas votre langue maternelle',young:'L\'arabe est une belle langue ! Apprends un nouveau mot chaque jour — tu comprendras mieux le Coran 🗣️'}
+  },
+  {
+    id:8, emoji:'🏛️',
+    ar:{title:'إسهامات الحضارة الإسلامية',desc:'الحضارة الإسلامية قدمت للعالم إنجازات في الطب والفلك والرياضيات والفلسفة. ابن سينا وابن الهيثم والخوارزمي جمعهم الإسلام رغم اختلاف أصولهم. هذا الإرث المشترك مصدر وحدة.',verse:'قُلْ هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ',verseRef:'الزمر ٩',hadith:'من سلك طريقاً يلتمس فيه علماً سهّل الله له طريقاً إلى الجنة — رواه مسلم',action:'ابحث اليوم عن عالم مسلم أثّر في حضارة العالم وشارك معلومة عنه',young:'العلماء المسلمون اخترعوا أشياء مذهلة! هل تعلم أن الخوارزمي اخترع الجبر؟ 🏛️'},
+    en:{title:'Islamic Civilization Contributions',desc:'Islamic civilization gave the world achievements in medicine, astronomy, mathematics, and philosophy. Ibn Sina, Ibn al-Haytham, and al-Khwarizmi were united by Islam despite their different origins. This shared legacy is a source of unity.',verse:'Say: Are those who know equal to those who do not know?',verseRef:'Az-Zumar 9',hadith:'Whoever follows a path seeking knowledge, Allah will make easy for them a path to Paradise — Muslim',action:'Research today a Muslim scholar who influenced world civilization and share a fact about them',young:'Muslim scholars invented amazing things! Did you know al-Khwarizmi invented algebra? 🏛️'},
+    fr:{title:'Contributions de la Civilisation Islamique',desc:'La civilisation islamique a offert au monde des realisations en medecine, astronomie, mathematiques et philosophie. Ibn Sina, Ibn al-Haytham et al-Khwarizmi ont ete unis par l\'Islam malgre leurs origines differentes. Cet heritage commun est une source d\'unite.',verse:'Dis : Sont-ils egaux, ceux qui savent et ceux qui ne savent pas ?',verseRef:'Az-Zumar 9',hadith:'Quiconque emprunte un chemin a la recherche du savoir, Allah lui facilitera un chemin vers le Paradis — Muslim',action:'Recherchez aujourd\'hui un savant musulman qui a influence la civilisation mondiale et partagez un fait sur lui',young:'Les savants musulmans ont invente des choses incroyables ! Savais-tu qu\'al-Khwarizmi a invente l\'algebre ? 🏛️'}
+  },
+  {
+    id:9, emoji:'🧑‍🤝‍🧑',
+    ar:{title:'تبادل الشباب',desc:'يجب أن يتعرف شباب المسلمين على إخوانهم في البلاد الأخرى. تبادل الزيارات والبرامج التعليمية بين الشباب يكسر الحواجز ويبني صداقات حقيقية تتجاوز الحدود.',verse:'يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا',verseRef:'الحجرات ١٣',hadith:'إنّ الله لا ينظر إلى صوركم ولا أموالكم ولكن ينظر إلى قلوبكم وأعمالكم — رواه مسلم',action:'تواصل اليوم مع مسلم من بلد آخر عبر الإنترنت وتعرّف على ثقافته',young:'تعرّف على صديق مسلم من بلد آخر! اكتشف ماذا يأكل وكيف يعيش 🧑‍🤝‍🧑'},
+    en:{title:'Youth Exchange',desc:'Muslim youth must get to know their brothers and sisters in other countries. Exchange visits and educational programs among young people break barriers and build real friendships beyond borders.',verse:'O mankind, We have created you from a male and a female and made you peoples and tribes that you may know one another',verseRef:'Al-Hujurat 13',hadith:'Allah does not look at your appearance or wealth, but rather at your hearts and deeds — Muslim',action:'Connect today with a Muslim from another country online and learn about their culture',young:'Make friends with a Muslim from another country! Discover what they eat and how they live 🧑‍🤝‍🧑'},
+    fr:{title:'Echange de Jeunes',desc:'Les jeunes musulmans doivent connaitre leurs freres et soeurs dans d\'autres pays. Les visites d\'echange et les programmes educatifs entre jeunes brisent les barrieres et construisent de vraies amities au-dela des frontieres.',verse:'O humanite, Nous vous avons crees d\'un male et d\'une femelle et Nous avons fait de vous des peuples et des tribus pour que vous vous connaissiez',verseRef:'Al-Hujurat 13',hadith:'Allah ne regarde pas vos apparences ni vos richesses, mais plutot vos coeurs et vos actes — Muslim',action:'Connectez-vous aujourd\'hui avec un musulman d\'un autre pays en ligne et apprenez sa culture',young:'Fais-toi un ami musulman d\'un autre pays ! Decouvre ce qu\'il mange et comment il vit 🧑‍🤝‍🧑'}
+  },
+  {
+    id:10, emoji:'🎓',
+    ar:{title:'وحدة التعليم',desc:'يجب أن تتقارب المناهج التعليمية في البلاد الإسلامية في الأسس. تعليم القرآن والسيرة النبوية والتاريخ الإسلامي يجب أن يكون مشتركاً حتى ينشأ جيل يعرف هويته.',verse:'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ',verseRef:'العلق ١',hadith:'طلب العلم فريضة على كل مسلم — رواه ابن ماجه',action:'اقترح على مدرستك نشاطاً ثقافياً عن بلد إسلامي مختلف',young:'تخيّل أنك وصديقك في ماليزيا تتعلمون نفس القصص عن الرسول! هذا رائع 🎓'},
+    en:{title:'Educational Unity',desc:'Educational curricula across Muslim countries should share common foundations. Teaching the Quran, Prophetic biography, and Islamic history must be shared so a generation grows up knowing its identity.',verse:'Read in the name of your Lord who created',verseRef:'Al-Alaq 1',hadith:'Seeking knowledge is an obligation upon every Muslim — Ibn Majah',action:'Suggest to your school a cultural activity about a different Muslim country',young:'Imagine you and your friend in Malaysia learn the same stories about the Prophet! How cool is that 🎓'},
+    fr:{title:'L\'Unite Educative',desc:'Les programmes educatifs des pays musulmans devraient partager des fondements communs. L\'enseignement du Coran, de la biographie prophetique et de l\'histoire islamique doit etre partage pour qu\'une generation grandisse en connaissant son identite.',verse:'Lis au nom de ton Seigneur qui a cree',verseRef:'Al-Alaq 1',hadith:'La quete du savoir est une obligation pour chaque musulman — Ibn Majah',action:'Suggerez a votre ecole une activite culturelle sur un pays musulman different',young:'Imagine que toi et ton ami en Malaisie apprenez les memes histoires sur le Prophete ! C\'est genial 🎓'}
+  },
+  {
+    id:11, emoji:'📺',
+    ar:{title:'التعاون الإعلامي',desc:'الإعلام سلاح ذو حدين. إعلام إسلامي موحّد يمكنه مواجهة التشويه وبناء صورة حقيقية عن الإسلام. التعاون الإعلامي بين الدول الإسلامية ضرورة لا ترف.',verse:'ادْعُ إِلَى سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ',verseRef:'النحل ١٢٥',hadith:'بلّغوا عني ولو آية — رواه البخاري',action:'شارك اليوم محتوى إيجابياً عن الإسلام والمسلمين على وسائل التواصل',young:'شارك قصة جميلة عن الإسلام مع أصدقائك! الكلمة الطيبة تصل بعيداً 📺'},
+    en:{title:'Media Cooperation',desc:'Media is a double-edged sword. A unified Islamic media can counter distortion and build a true image of Islam. Media cooperation between Muslim countries is a necessity, not a luxury.',verse:'Invite to the way of your Lord with wisdom and good instruction',verseRef:'An-Nahl 125',hadith:'Convey from me even if it is one verse — Bukhari',action:'Share positive content about Islam and Muslims on social media today',young:'Share a beautiful story about Islam with your friends! A kind word travels far 📺'},
+    fr:{title:'La Cooperation Mediatique',desc:'Les medias sont une arme a double tranchant. Des medias islamiques unifies peuvent contrer la deformation et construire une vraie image de l\'Islam. La cooperation mediatique entre pays musulmans est une necessite, pas un luxe.',verse:'Appelle au sentier de ton Seigneur par la sagesse et la bonne exhortation',verseRef:'An-Nahl 125',hadith:'Transmettez de ma part ne serait-ce qu\'un verset — Bukhari',action:'Partagez aujourd\'hui du contenu positif sur l\'Islam et les musulmans sur les reseaux sociaux',young:'Partage une belle histoire sur l\'Islam avec tes amis ! Un bon mot voyage loin 📺'}
+  },
+  {
+    id:12, emoji:'💰',
+    ar:{title:'التعاون الاقتصادي',desc:'الاقتصاد الإسلامي المشترك يمكن أن يحقق الاكتفاء الذاتي للأمة. التجارة بين الدول الإسلامية يجب أن تكون أولوية. المقاطعة الاقتصادية سلاح مشروع عند الحاجة.',verse:'وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَى وَلَا تَعَاوَنُوا عَلَى الْإِثْمِ وَالْعُدْوَانِ',verseRef:'المائدة ٢',hadith:'ما من مسلم يغرس غرساً فيأكل منه إنسان أو طير أو بهيمة إلا كان له به صدقة — متفق عليه',action:'ابحث عن منتج من بلد إسلامي واشتره دعماً للتعاون الاقتصادي',young:'عندما نشتري من بعضنا البعض نصبح أقوى! ابحث عن منتج من بلد مسلم 💰'},
+    en:{title:'Economic Cooperation',desc:'A shared Islamic economy can achieve self-sufficiency for the Ummah. Trade between Muslim countries must be a priority. Economic boycott is a legitimate tool when needed.',verse:'And cooperate in righteousness and piety, but do not cooperate in sin and aggression',verseRef:'Al-Ma\'idah 2',hadith:'No Muslim plants a tree or sows a seed from which a person, bird, or animal eats without it being charity for them — Agreed upon',action:'Look for a product from a Muslim country and buy it to support economic cooperation',young:'When we buy from each other we become stronger! Look for a product from a Muslim country 💰'},
+    fr:{title:'La Cooperation Economique',desc:'Une economie islamique commune peut realiser l\'autosuffisance de la Oumma. Le commerce entre pays musulmans doit etre une priorite. Le boycott economique est un outil legitime en cas de besoin.',verse:'Entraidez-vous dans la bienfaisance et la piete, et ne vous entraidez pas dans le peche et l\'agression',verseRef:'Al-Ma\'idah 2',hadith:'Aucun musulman ne plante un arbre ou ne seme une graine dont une personne, un oiseau ou un animal mange sans que ce soit une charite pour lui — Unanimement reconnu',action:'Cherchez un produit d\'un pays musulman et achetez-le pour soutenir la cooperation economique',young:'Quand nous achetons les uns aux autres nous devenons plus forts ! Cherche un produit d\'un pays musulman 💰'}
+  },
+  {
+    id:13, emoji:'⚔️',
+    ar:{title:'الدفاع المشترك',desc:'المسلمون يجب أن ينصروا بعضهم عند العدوان. الدفاع المشترك ليس فقط عسكرياً بل يشمل الدفاع الدبلوماسي والإعلامي والاقتصادي. أمة تترك جزءاً منها يُظلم لا تستحق العزة.',verse:'وَإِنِ اسْتَنْصَرُوكُمْ فِي الدِّينِ فَعَلَيْكُمُ النَّصْرُ',verseRef:'الأنفال ٧٢',hadith:'انصر أخاك ظالماً أو مظلوماً — رواه البخاري',action:'ادعُ اليوم لإخوانك المسلمين المستضعفين في أي مكان في العالم',young:'عندما يحتاج أخوك المسلم المساعدة، ساعده! حتى الدعاء يساعد ⚔️'},
+    en:{title:'Joint Defense',desc:'Muslims must support each other against aggression. Joint defense is not only military but includes diplomatic, media, and economic defense. An Ummah that abandons part of itself to oppression does not deserve honor.',verse:'And if they seek help from you in religion, then you must help',verseRef:'Al-Anfal 72',hadith:'Support your brother whether he is an oppressor or oppressed — Bukhari',action:'Make dua today for your Muslim brothers and sisters who are oppressed anywhere in the world',young:'When your Muslim brother needs help, help them! Even making dua helps ⚔️'},
+    fr:{title:'La Defense Commune',desc:'Les musulmans doivent se soutenir mutuellement face a l\'agression. La defense commune n\'est pas seulement militaire mais inclut la defense diplomatique, mediatique et economique. Une Oumma qui abandonne une partie d\'elle-meme a l\'oppression ne merite pas l\'honneur.',verse:'Et s\'ils vous demandent de l\'aide dans la religion, vous devez les aider',verseRef:'Al-Anfal 72',hadith:'Soutiens ton frere qu\'il soit oppresseur ou opprime — Bukhari',action:'Faites des duas aujourd\'hui pour vos freres et soeurs musulmans opprimes partout dans le monde',young:'Quand ton frere musulman a besoin d\'aide, aide-le ! Meme les duas aident ⚔️'}
+  },
+  {
+    id:14, emoji:'🎭',
+    ar:{title:'المهرجانات الثقافية',desc:'إقامة مهرجانات ثقافية إسلامية مشتركة تعرّف المسلمين ببعضهم. الفنون والأدب والموسيقى الراقية تقرّب القلوب. الثقافة المشتركة تبني جسوراً لا جدراناً.',verse:'وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا',verseRef:'الحجرات ١٣',hadith:'إن الله جميل يحب الجمال — رواه مسلم',action:'احضر حدثاً ثقافياً إسلامياً أو شارك في تنظيم واحد في مجتمعك',young:'المهرجانات ممتعة! تخيّل مهرجاناً فيه أكلات وأناشيد من كل البلاد الإسلامية 🎭'},
+    en:{title:'Cultural Festivals',desc:'Holding shared Islamic cultural festivals introduces Muslims to each other. Arts, literature, and refined music bring hearts together. Shared culture builds bridges, not walls.',verse:'And We made you peoples and tribes that you may know one another',verseRef:'Al-Hujurat 13',hadith:'Indeed Allah is beautiful and loves beauty — Muslim',action:'Attend an Islamic cultural event or help organize one in your community',young:'Festivals are fun! Imagine a festival with food and songs from every Muslim country 🎭'},
+    fr:{title:'Les Festivals Culturels',desc:'Organiser des festivals culturels islamiques communs fait se connaitre les musulmans entre eux. Les arts, la litterature et la musique raffinee rapprochent les coeurs. La culture commune construit des ponts, pas des murs.',verse:'Et Nous avons fait de vous des peuples et des tribus pour que vous vous connaissiez',verseRef:'Al-Hujurat 13',hadith:'Allah est beau et aime la beaute — Muslim',action:'Assistez a un evenement culturel islamique ou aidez a en organiser un dans votre communaute',young:'Les festivals sont amusants ! Imagine un festival avec de la nourriture et des chansons de chaque pays musulman 🎭'}
+  },
+  {
+    id:15, emoji:'🤲',
+    ar:{title:'الاحترام عند الاختلاف',desc:'الخلاف في الرأي لا يفسد للودّ قضية. الشيخ الغزالي يؤكد أن المسلمين يمكنهم الاختلاف في الفروع مع الحفاظ على الأخوّة. آداب الحوار في الإسلام تضمن احتراماً متبادلاً.',verse:'وَقُولُوا لِلنَّاسِ حُسْنًا',verseRef:'البقرة ٨٣',hadith:'ليس منا من لم يرحم صغيرنا ويوقر كبيرنا — رواه الترمذي',action:'إذا اختلفت مع أحد اليوم في مسألة دينية، حاوره بأدب واحترام',young:'يمكننا أن نختلف ونبقى أصدقاء! المهم أن نتكلم بلطف واحترام 🤲'},
+    en:{title:'Mutual Respect in Disagreement',desc:'Difference of opinion should not ruin brotherhood. Sheikh al-Ghazali emphasizes that Muslims can disagree on details while maintaining brotherly bonds. The etiquette of dialogue in Islam ensures mutual respect.',verse:'And speak to people good words',verseRef:'Al-Baqarah 83',hadith:'He is not one of us who does not show mercy to our young and respect our elders — Tirmidhi',action:'If you disagree with someone today on a religious matter, discuss it with politeness and respect',young:'We can disagree and still be friends! The important thing is to speak kindly and respectfully 🤲'},
+    fr:{title:'Le Respect Mutuel dans le Desaccord',desc:'La divergence d\'opinion ne doit pas ruiner la fraternite. Le Sheikh al-Ghazali souligne que les musulmans peuvent diverger sur les details tout en maintenant les liens fraternels. L\'etiquette du dialogue en Islam assure le respect mutuel.',verse:'Et parlez aux gens en bons termes',verseRef:'Al-Baqarah 83',hadith:'N\'est pas des notres celui qui ne montre pas de misericorde envers nos jeunes et de respect envers nos aines — Tirmidhi',action:'Si vous etes en desaccord avec quelqu\'un aujourd\'hui sur une question religieuse, discutez-en avec politesse et respect',young:'Nous pouvons etre en desaccord et rester amis ! L\'important est de parler gentiment et respectueusement 🤲'}
+  }
 ];
 
-const REFLECTIONS = [
-  {emoji:'🤝',ar:{title:'لماذا تفرق المسلمون؟',question:'ما أسباب انقسام الأمة الإسلامية رغم وحدة الدين؟',answer:'التعصب المذهبي والجهل والأطماع السياسية فرّقت المسلمين. العلاج في العودة للقرآن والسنة بفهم واعٍ.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',verseRef:'آل عمران ٣: ١٠٣'},en:{title:'Why Did Muslims Divide?',question:'What caused the division of the Islamic Ummah despite the unity of religion?',answer:'Sectarian fanaticism, ignorance, and political ambitions divided Muslims. The cure is returning to the Quran and Sunnah with conscious understanding.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',verseRef:'Al-Imran 3:103'},fr:{title:'Pourquoi les Musulmans Se Sont-Ils Divises ?',question:'Qu\'est-ce qui a cause la division de l\'Oumma islamique malgre l\'unite de la religion ?',answer:'Le fanatisme sectaire, l\'ignorance et les ambitions politiques ont divise les musulmans. Le remede est le retour au Coran et a la Sunnah.',verse:'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',verseRef:'Al-Imran 3:103'}},
-  {emoji:'📖',ar:{title:'كيف نبني الوحدة؟',question:'ما الخطوات العملية لبناء وحدة إسلامية حقيقية؟',answer:'العلم والحوار واحترام التنوع والتركيز على المشتركات. كل فرد يبدأ من نفسه ومجتمعه.',verse:'إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ',verseRef:'الرعد ١٣: ١١'},en:{title:'How Do We Build Unity?',question:'What are practical steps to build genuine Islamic unity?',answer:'Knowledge, dialogue, respecting diversity, and focusing on commonalities. Every individual starts with themselves and their community.',verse:'إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ',verseRef:'Ar-Ra\'d 13:11'},fr:{title:'Comment Construire l\'Unite ?',question:'Quelles sont les etapes pratiques pour construire une veritable unite islamique ?',answer:'Le savoir, le dialogue, le respect de la diversite et la focalisation sur les points communs. Chaque individu commence par lui-meme.',verse:'إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ',verseRef:'Ar-Ra\'d 13:11'}},
-  {emoji:'🌍',ar:{title:'هل التنوع ضعف أم قوة؟',question:'الأمة فيها مذاهب وثقافات ولغات مختلفة — هل هذا ضعف؟',answer:'التنوع قوة عظيمة إذا أُحسن إدارته. الأمة الإسلامية كالجسد الواحد — أعضاؤه مختلفة لكنها تعمل معاً.',verse:'وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا',verseRef:'الحجرات ٤٩: ١٣'},en:{title:'Is Diversity a Weakness or Strength?',question:'The Ummah has different schools, cultures, and languages — is this weakness?',answer:'Diversity is a great strength when managed well. The Islamic Ummah is like one body — its members differ but work together.',verse:'وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا',verseRef:'Al-Hujurat 49:13'},fr:{title:'La Diversite Est-Elle une Faiblesse ou une Force ?',question:'L\'Oumma a differentes ecoles, cultures et langues — est-ce une faiblesse ?',answer:'La diversite est une grande force quand elle est bien geree. L\'Oumma islamique est comme un seul corps — ses membres different mais travaillent ensemble.',verse:'وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا',verseRef:'Al-Hujurat 49:13'}},
-  {emoji:'⚖️',ar:{title:'ما الفرق بين الاختلاف والانقسام؟',question:'هل كل اختلاف انقسام؟ وكيف نميز بينهما؟',answer:'الاختلاف في الفروع طبيعي ورحمة. الانقسام هو التعصب والتكفير والعداء. الأول يثري والثاني يدمر.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً وَلَا يَزَالُونَ مُخْتَلِفِينَ',verseRef:'هود ١١: ١١٨'},en:{title:'What Is the Difference Between Disagreement and Division?',question:'Is every disagreement a division? How do we distinguish them?',answer:'Disagreement in details is natural and merciful. Division is fanaticism, excommunication, and enmity. The former enriches while the latter destroys.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً وَلَا يَزَالُونَ مُخْتَلِفِينَ',verseRef:'Hud 11:118'},fr:{title:'Quelle Est la Difference entre Desaccord et Division ?',question:'Chaque desaccord est-il une division ? Comment les distinguer ?',answer:'Le desaccord dans les details est naturel et misericordieux. La division est le fanatisme, l\'excommunication et l\'hostilite.',verse:'وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً وَلَا يَزَالُونَ مُخْتَلِفِينَ',verseRef:'Hud 11:118'}},
-  {emoji:'🕊️',ar:{title:'كيف تعامل النبي مع الاختلاف؟',question:'كيف أدار النبي ﷺ التنوع في المجتمع الإسلامي الأول؟',answer:'النبي ﷺ بنى مجتمعاً متنوعاً في المدينة — مهاجرين وأنصار وقبائل مختلفة. وحّدهم بالأخوة والعدل لا بالإكراه.',verse:'لَا إِكْرَاهَ فِي الدِّينِ',verseRef:'البقرة ٢: ٢٥٦'},en:{title:'How Did the Prophet Handle Differences?',question:'How did the Prophet manage diversity in the first Islamic society?',answer:'The Prophet built a diverse community in Medina — migrants, helpers, and different tribes. He united them through brotherhood and justice, not coercion.',verse:'لَا إِكْرَاهَ فِي الدِّينِ',verseRef:'Al-Baqarah 2:256'},fr:{title:'Comment le Prophete a-t-Il Gere les Differences ?',question:'Comment le Prophete a-t-il gere la diversite dans la premiere societe islamique ?',answer:'Le Prophete a construit une communaute diverse a Medine — emigres, aides et tribus differentes. Il les a unis par la fraternite et la justice, pas la coercition.',verse:'لَا إِكْرَاهَ فِي الدِّينِ',verseRef:'Al-Baqarah 2:256'}},
-  {emoji:'🌟',ar:{title:'ما مسؤوليتي في بناء الوحدة؟',question:'ما الذي يمكنني فعله كفرد لتحقيق الوحدة الإسلامية؟',answer:'ابدأ بنفسك: تعلم، احترم الآخر، حاور بأدب، لا تتعصب، وسامح. التغيير يبدأ من الفرد.',verse:'إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ',verseRef:'الرعد ١٣: ١١'},en:{title:'What Is My Responsibility in Building Unity?',question:'What can I do as an individual to achieve Islamic unity?',answer:'Start with yourself: learn, respect others, discuss with courtesy, don\'t be fanatical, and forgive. Change starts with the individual.',verse:'إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ',verseRef:'Ar-Ra\'d 13:11'},fr:{title:'Quelle Est Ma Responsabilite dans la Construction de l\'Unite ?',question:'Que puis-je faire en tant qu\'individu pour realiser l\'unite islamique ?',answer:'Commencez par vous-meme : apprenez, respectez les autres, discutez avec courtoisie, ne soyez pas fanatique et pardonnez. Le changement commence par l\'individu.',verse:'إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ',verseRef:'Ar-Ra\'d 13:11'}}
-];
-
-const HABITS = [
-  {emoji:'🤝',ar:{label:'تواصل مع مسلم من ثقافة مختلفة',source:'بناء الوحدة'},en:{label:'Connect with a Muslim from a different culture',source:'Building unity'},fr:{label:'Connectez-vous avec un musulman d\'une culture differente',source:'Construire l\'unite'}},
-  {emoji:'📖',ar:{label:'اقرأ صفحة من القرآن بتدبر',source:'القرآن دستور الوحدة'},en:{label:'Read a page of Quran with reflection',source:'Quran: constitution of unity'},fr:{label:'Lisez une page du Coran avec reflexion',source:'Coran : constitution de l\'unite'}},
-  {emoji:'💬',ar:{label:'حاور من يختلف معك بأدب',source:'أدب الاختلاف'},en:{label:'Discuss respectfully with someone who disagrees',source:'Etiquette of disagreement'},fr:{label:'Discutez respectueusement avec quelqu\'un en desaccord',source:'Etiquette du desaccord'}},
-  {emoji:'❤️',ar:{label:'عبّر عن محبتك لأخ مسلم',source:'الأخوة الإسلامية'},en:{label:'Express love to a Muslim brother',source:'Islamic brotherhood'},fr:{label:'Exprimez votre amour a un frere musulman',source:'Fraternite islamique'}},
-  {emoji:'📚',ar:{label:'تعلم شيئاً عن مذهب آخر',source:'العلم يوحّد'},en:{label:'Learn about another school of thought',source:'Knowledge unites'},fr:{label:'Apprenez sur une autre ecole de pensee',source:'Le savoir unit'}},
-  {emoji:'🤲',ar:{label:'ادعُ للأمة بالوحدة',source:'الدعاء سلاح المؤمن'},en:{label:'Pray for the Ummah\'s unity',source:'Dua is the believer\'s weapon'},fr:{label:'Priez pour l\'unite de l\'Oumma',source:'Le dua est l\'arme du croyant'}},
-  {emoji:'⚖️',ar:{label:'كن عادلاً في حكمك على الآخرين',source:'العدل أساس الوحدة'},en:{label:'Be just in judging others',source:'Justice is the foundation'},fr:{label:'Soyez juste en jugeant les autres',source:'La justice est le fondement'}},
-  {emoji:'🌱',ar:{label:'علّم طفلاً قيمة احترام الاختلاف',source:'التربية على الوحدة'},en:{label:'Teach a child the value of respecting differences',source:'Education for unity'},fr:{label:'Enseignez a un enfant le respect des differences',source:'Education pour l\'unite'}}
-];
-
+// ═══════════════ QUIZ DATA (10 Questions) ═══════════════
 const QUIZ = [
-  {ar:'هل تحترم المذاهب الإسلامية الأخرى؟',en:'Do you respect other Islamic schools of thought?',fr:'Respectez-vous les autres ecoles de pensee islamiques ?'},
-  {ar:'هل تتعصب لمذهبك ضد المذاهب الأخرى؟',en:'Are you fanatical about your school against others?',fr:'Etes-vous fanatique de votre ecole contre les autres ?'},
-  {ar:'هل تتعلم عن التنوع الإسلامي بانتظام؟',en:'Do you regularly learn about Islamic diversity?',fr:'Apprenez-vous regulierement sur la diversite islamique ?'},
-  {ar:'هل تفرّق بين المسلمين على أساس القومية؟',en:'Do you differentiate between Muslims based on nationality?',fr:'Faites-vous une difference entre musulmans basee sur la nationalite ?'},
-  {ar:'هل تحاور من يختلف معك بأدب؟',en:'Do you discuss courteously with those who disagree?',fr:'Discutez-vous avec courtoisie avec ceux qui sont en desaccord ?'},
-  {ar:'هل تركز على المشتركات أم الخلافات؟',en:'Do you focus on commonalities or differences?',fr:'Vous concentrez-vous sur les points communs ou les differences ?'},
-  {ar:'هل تدعو للوحدة في محيطك؟',en:'Do you advocate for unity in your circle?',fr:'Pronez-vous l\'unite dans votre entourage ?'},
-  {ar:'هل تسامح من أساء إليك من المسلمين؟',en:'Do you forgive Muslims who wronged you?',fr:'Pardonnez-vous aux musulmans qui vous ont fait du tort ?'}
+  {
+    ar:{q:'أكمل الآية: "إنّ هذه أمتكم أمةً ... وأنا ربكم فاعبدون"',opts:['عظيمة','واحدة','قوية','كبيرة'],correct:1,hint:'الآية في سورة الأنبياء تؤكد وحدة الأمة',quran:'الأنبياء ٩٢'},
+    en:{q:'Complete the verse: "This community of yours is ... community and I am your Lord"',opts:['A great','One','A strong','A large'],correct:1,hint:'This verse in Surah Al-Anbiya affirms the unity of the Ummah',quran:'Al-Anbiya 92'},
+    fr:{q:'Completez le verset : "Cette communaute qui est la votre est une communaute ... et Je suis votre Seigneur"',opts:['Grande','Unique','Forte','Vaste'],correct:1,hint:'Ce verset dans Sourate Al-Anbiya affirme l\'unite de la Oumma',quran:'Al-Anbiya 92'}
+  },
+  {
+    ar:{q:'كم عدد المذاهب الفقهية الكبرى في الإسلام السنّي؟',opts:['٢','٣','٤','٥'],correct:2,hint:'أبو حنيفة ومالك والشافعي وأحمد',quran:'هود ١١٨'},
+    en:{q:'How many major schools of jurisprudence are there in Sunni Islam?',opts:['2','3','4','5'],correct:2,hint:'Abu Hanifa, Malik, Shafi\'i, and Ahmad',quran:'Hud 118'},
+    fr:{q:'Combien d\'ecoles de jurisprudence majeures y a-t-il en Islam sunnite ?',opts:['2','3','4','5'],correct:2,hint:'Abu Hanifa, Malik, Shafi\'i et Ahmad',quran:'Hud 118'}
+  },
+  {
+    ar:{q:'أي آية تحثّ على التعارف بين الشعوب؟',opts:['آل عمران ١١٠','الحجرات ١٣','البقرة ٢٥٦','المائدة ٢'],correct:1,hint:'سورة الحجرات فيها "لتعارفوا"',quran:'الحجرات ١٣'},
+    en:{q:'Which verse encourages getting to know one another among peoples?',opts:['Al Imran 110','Al-Hujurat 13','Al-Baqarah 256','Al-Ma\'idah 2'],correct:1,hint:'Surah Al-Hujurat contains "that you may know one another"',quran:'Al-Hujurat 13'},
+    fr:{q:'Quel verset encourage les peuples a se connaitre mutuellement ?',opts:['Al Imran 110','Al-Hujurat 13','Al-Baqarah 256','Al-Ma\'idah 2'],correct:1,hint:'Sourate Al-Hujurat contient "pour que vous vous connaissiez"',quran:'Al-Hujurat 13'}
+  },
+  {
+    ar:{q:'من هو العالم المسلم الذي اخترع الجبر؟',opts:['ابن سينا','ابن الهيثم','الخوارزمي','الرازي'],correct:2,hint:'اسمه أصل كلمة Algorithm بالإنجليزية',quran:'الزمر ٩'},
+    en:{q:'Which Muslim scholar invented algebra?',opts:['Ibn Sina','Ibn al-Haytham','Al-Khwarizmi','Al-Razi'],correct:2,hint:'His name is the origin of the word "Algorithm" in English',quran:'Az-Zumar 9'},
+    fr:{q:'Quel savant musulman a invente l\'algebre ?',opts:['Ibn Sina','Ibn al-Haytham','Al-Khwarizmi','Al-Razi'],correct:2,hint:'Son nom est a l\'origine du mot "Algorithme" en anglais',quran:'Az-Zumar 9'}
+  },
+  {
+    ar:{q:'ما الآية التي تأمر بالتعاون على البرّ والتقوى؟',opts:['البقرة ٢٨٦','المائدة ٢','النساء ١','التوبة ٧١'],correct:1,hint:'في سورة المائدة "وتعاونوا على البرّ والتقوى"',quran:'المائدة ٢'},
+    en:{q:'Which verse commands cooperation in righteousness and piety?',opts:['Al-Baqarah 286','Al-Ma\'idah 2','An-Nisa 1','At-Tawbah 71'],correct:1,hint:'In Surah Al-Ma\'idah: "cooperate in righteousness and piety"',quran:'Al-Ma\'idah 2'},
+    fr:{q:'Quel verset ordonne l\'entraide dans la bienfaisance et la piete ?',opts:['Al-Baqarah 286','Al-Ma\'idah 2','An-Nisa 1','At-Tawbah 71'],correct:1,hint:'Dans Sourate Al-Ma\'idah : "entraidez-vous dans la bienfaisance et la piete"',quran:'Al-Ma\'idah 2'}
+  },
+  {
+    ar:{q:'أكمل الحديث: "المؤمن للمؤمن كـ..."',opts:['الأخ','البنيان','الماء','الشجرة'],correct:1,hint:'يشدّ بعضه بعضاً',quran:'الأنفال ٧٣'},
+    en:{q:'Complete the hadith: "The believer to the believer is like a..."',opts:['Brother','Building','Water','Tree'],correct:1,hint:'Each part strengthens the other',quran:'Al-Anfal 73'},
+    fr:{q:'Completez le hadith : "Le croyant pour le croyant est comme une..."',opts:['Frere','Construction','Eau','Arbre'],correct:1,hint:'Dont chaque partie renforce l\'autre',quran:'Al-Anfal 73'}
+  },
+  {
+    ar:{q:'في أي لغة نزل القرآن الكريم؟',opts:['الفارسية','التركية','العربية','العبرية'],correct:2,hint:'لغة النبي محمد ﷺ',quran:'يوسف ٢'},
+    en:{q:'In which language was the Holy Quran revealed?',opts:['Persian','Turkish','Arabic','Hebrew'],correct:2,hint:'The language of Prophet Muhammad (PBUH)',quran:'Yusuf 2'},
+    fr:{q:'Dans quelle langue le Saint Coran a-t-il ete revele ?',opts:['Persan','Turc','Arabe','Hebreu'],correct:2,hint:'La langue du Prophete Muhammad (PSL)',quran:'Yusuf 2'}
+  },
+  {
+    ar:{q:'ماذا تعني "لا تفرّقوا" في القرآن؟',opts:['لا تسافروا','لا تتشتتوا وتختلفوا','لا تتكلموا','لا تجتمعوا'],correct:1,hint:'الله ينهانا عن الانقسام والتفرق',quran:'آل عمران ١٠٣'},
+    en:{q:'What does "do not become divided" mean in the Quran?',opts:['Do not travel','Do not split and dispute','Do not speak','Do not gather'],correct:1,hint:'Allah forbids us from division and splitting',quran:'Al Imran 103'},
+    fr:{q:'Que signifie "ne vous divisez pas" dans le Coran ?',opts:['Ne voyagez pas','Ne vous divisez pas et ne disputez pas','Ne parlez pas','Ne vous rassemblez pas'],correct:1,hint:'Allah nous interdit la division et la separation',quran:'Al Imran 103'}
+  },
+  {
+    ar:{q:'مؤلف كتاب "دستور الوحدة الثقافية بين المسلمين" هو:',opts:['يوسف القرضاوي','سيد قطب','محمد الغزالي','حسن البنا'],correct:2,hint:'عالم مصري لُقب بأديب الدعوة',quran:'الأنبياء ٩٢'},
+    en:{q:'The author of "Charter of Cultural Unity Among Muslims" is:',opts:['Yusuf al-Qaradawi','Sayyid Qutb','Mohammed al-Ghazali','Hasan al-Banna'],correct:2,hint:'An Egyptian scholar nicknamed "The Literary Preacher"',quran:'Al-Anbiya 92'},
+    fr:{q:'L\'auteur de "Charte de l\'Unite Culturelle entre les Musulmans" est :',opts:['Yusuf al-Qaradawi','Sayyid Qutb','Mohammed al-Ghazali','Hasan al-Banna'],correct:2,hint:'Un savant egyptien surnomme "Le Litteraire de la Predication"',quran:'Al-Anbiya 92'}
+  },
+  {
+    ar:{q:'أكمل الآية: "واعتصموا بحبل الله ... ولا تفرقوا"',opts:['بعضكم','جميعاً','دائماً','أبداً'],correct:1,hint:'الآية تأمر بالاعتصام الجماعي',quran:'آل عمران ١٠٣'},
+    en:{q:'Complete the verse: "And hold firmly to the rope of Allah ... and do not become divided"',opts:['Some of you','All together','Always','Never'],correct:1,hint:'The verse commands collective holding',quran:'Al Imran 103'},
+    fr:{q:'Completez le verset : "Et cramponnez-vous ... au cable d\'Allah et ne soyez pas divises"',opts:['Certains d\'entre vous','Tous ensemble','Toujours','Jamais'],correct:1,hint:'Le verset ordonne l\'accrochage collectif',quran:'Al Imran 103'}
+  }
 ];
 
+// ═══════════════ DUAS DATA ═══════════════
 const DUAS = [
-  {ar:{label:'دعاء الوحدة',text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا',tr:'اللهم اجمع قلوب المسلمين'},en:{label:'Dua for Unity',text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا',tr:'O God, unite our hearts and reconcile us'},fr:{label:'Dua pour l\'Unite',text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا',tr:'O Dieu, unis nos coeurs et reconcilie-nous'}},
-  {ar:{label:'دعاء الأخوة',text:'اللَّهُمَّ اجْعَلْنَا إِخْوَاناً مُتَحَابِّينَ فِيكَ',tr:'اللهم اجعلنا متحابين في الله'},en:{label:'Dua of Brotherhood',text:'اللَّهُمَّ اجْعَلْنَا إِخْوَاناً مُتَحَابِّينَ فِيكَ',tr:'O God, make us brothers who love one another for Your sake'},fr:{label:'Dua de Fraternite',text:'اللَّهُمَّ اجْعَلْنَا إِخْوَاناً مُتَحَابِّينَ فِيكَ',tr:'O Dieu, fais de nous des freres qui s\'aiment pour Ton amour'}},
-  {ar:{label:'دعاء الهداية',text:'اللَّهُمَّ اهْدِنَا سَوَاءَ الصِّرَاطِ',tr:'ربي اهدنا الطريق المستقيم'},en:{label:'Dua for Guidance',text:'اللَّهُمَّ اهْدِنَا سَوَاءَ الصِّرَاطِ',tr:'O God, guide us to the straight path'},fr:{label:'Dua de Guidance',text:'اللَّهُمَّ اهْدِنَا سَوَاءَ الصِّرَاطِ',tr:'O Dieu, guide-nous vers le droit chemin'}},
-  {ar:{label:'دعاء نصرة الأمة',text:'اللَّهُمَّ انصُرِ الْإِسْلَامَ وَالْمُسْلِمِينَ وَأَعِزَّ الْإِسْلَامَ وَالْمُسْلِمِينَ',tr:'ربي انصر الأمة ووحدها'},en:{label:'Dua for the Ummah',text:'اللَّهُمَّ انصُرِ الْإِسْلَامَ وَالْمُسْلِمِينَ وَأَعِزَّ الْإِسْلَامَ وَالْمُسْلِمِينَ',tr:'O God, support Islam and Muslims and honor Islam and Muslims'},fr:{label:'Dua pour l\'Oumma',text:'اللَّهُمَّ انصُرِ الْإِسْلَامَ وَالْمُسْلِمِينَ وَأَعِزَّ الْإِسْلَامَ وَالْمُسْلِمِينَ',tr:'O Dieu, soutiens l\'Islam et les musulmans et honore l\'Islam et les musulmans'}},
-  {ar:{label:'دعاء التوفيق',text:'رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا',tr:'ربنا ارزقنا رحمتك ورشدك'},en:{label:'Dua for Success',text:'رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا',tr:'Our Lord, grant us mercy from You and guide us rightly'},fr:{label:'Dua pour le Succes',text:'رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا',tr:'Notre Seigneur, accorde-nous Ta misericorde et guide-nous justement'}}
+  { ar:{label:'دعاء الأخوّة',text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا وَاهْدِنَا سُبُلَ السَّلَامِ',tr:'رواه أبو داود'},
+    en:{label:'Dua for Brotherhood',text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا وَاهْدِنَا سُبُلَ السَّلَامِ',tr:'O Allah, unite our hearts, mend our relations, and guide us to the paths of peace — Abu Dawud'},
+    fr:{label:'Dua pour la Fraternite',text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا وَأَصْلِحْ ذَاتَ بَيْنِنَا وَاهْدِنَا سُبُلَ السَّلَامِ',tr:'O Allah, unis nos coeurs, repare nos relations et guide-nous vers les chemins de la paix — Abu Dawud'} },
+  { ar:{label:'دعاء الوحدة',text:'رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا',tr:'الحشر ١٠'},
+    en:{label:'Dua for Unity',text:'رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا',tr:'Our Lord, forgive us and our brothers who preceded us in faith, and put no hatred in our hearts for those who believe — Al-Hashr 10'},
+    fr:{label:'Dua pour l\'Unite',text:'رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا',tr:'Notre Seigneur, pardonne-nous ainsi qu\'a nos freres qui nous ont precedes dans la foi, et ne mets pas de haine dans nos coeurs pour ceux qui croient — Al-Hashr 10'} },
+  { ar:{label:'دعاء النصرة',text:'رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',tr:'البقرة ٢٥٠'},
+    en:{label:'Dua for Support',text:'رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',tr:'Our Lord, pour upon us patience, plant firmly our feet, and give us victory — Al-Baqarah 250'},
+    fr:{label:'Dua pour le Soutien',text:'رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',tr:'Notre Seigneur, deverse sur nous la patience, affermis nos pas et donne-nous la victoire — Al-Baqarah 250'} },
+  { ar:{label:'دعاء الهداية',text:'رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً',tr:'آل عمران ٨'},
+    en:{label:'Dua for Guidance',text:'رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً',tr:'Our Lord, do not let our hearts deviate after You have guided us, and grant us mercy from You — Al Imran 8'},
+    fr:{label:'Dua pour la Guidance',text:'رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً',tr:'Notre Seigneur, ne fais pas devier nos coeurs apres que Tu nous as guides et accorde-nous une misericorde — Al Imran 8'} },
+  { ar:{label:'دعاء التوفيق',text:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',tr:'البقرة ٢٠١'},
+    en:{label:'Dua for Success',text:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',tr:'Our Lord, give us good in this world and good in the Hereafter, and protect us from the Fire — Al-Baqarah 201'},
+    fr:{label:'Dua pour le Succes',text:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',tr:'Notre Seigneur, donne-nous le bien dans ce monde et le bien dans l\'Au-dela, et protege-nous du Feu — Al-Baqarah 201'} }
 ];
 
-let lang = localStorage.getItem('dustur-lang') || 'ar';
-let theme = localStorage.getItem('dustur-theme') || 'ocean';
-const themes = ['ocean','night','sky'];
-const themeIcons = ['🌊','🌙','☁️'];
-const themeNames = {ocean:'Ocean / محيط',night:'Night / ليل',sky:'Sky / سماء'};
-let currentCardIdx = -1;
+// ═══════════════ XP / BADGE SYSTEM ═══════════════
+const XP_KEY = 'dustur-xp';
+const BADGES_KEY = 'dustur-badges';
+const READ_KEY = 'dustur-read';
+const STREAK_KEY = 'dustur-streak';
+const MODE_KEY = 'dustur-mode';
+const QUIZ_BEST_KEY = 'dustur-quiz-best';
 
+const BADGE_DEFS = [
+  { id:'beginner', emoji:'🌱', xp:0, ar:'مبتدئ', en:'Beginner', fr:'Debutant' },
+  { id:'reader', emoji:'📖', xp:100, ar:'قارئ', en:'Reader', fr:'Lecteur' },
+  { id:'scholar', emoji:'🎓', xp:300, ar:'عالم', en:'Scholar', fr:'Savant' },
+  { id:'persistent', emoji:'🔥', xp:500, ar:'مثابر', en:'Persistent', fr:'Perseverant' },
+  { id:'expert', emoji:'🏆', xp:1000, ar:'خبير', en:'Expert', fr:'Expert' }
+];
+
+function getXP() { return parseInt(localStorage.getItem(XP_KEY) || '0'); }
+function addXP(pts) {
+  const xp = getXP() + pts;
+  localStorage.setItem(XP_KEY, xp);
+  checkBadges(xp);
+  updateXPDisplay();
+  return xp;
+}
+function getLevel(xp) {
+  if (xp >= 1000) return 5;
+  if (xp >= 500) return 4;
+  if (xp >= 300) return 3;
+  if (xp >= 100) return 2;
+  return 1;
+}
+function getEarnedBadges() { return JSON.parse(localStorage.getItem(BADGES_KEY) || '[]'); }
+function checkBadges(xp) {
+  const earned = getEarnedBadges();
+  BADGE_DEFS.forEach(b => {
+    if (xp >= b.xp && !earned.includes(b.id)) {
+      earned.push(b.id);
+      localStorage.setItem(BADGES_KEY, JSON.stringify(earned));
+      showToast(`${b.emoji} ${b[lang]}!`);
+      playSound('success');
+    }
+  });
+}
+function getReadCards() { return JSON.parse(localStorage.getItem(READ_KEY) || '[]'); }
+function markCardRead(id) {
+  const read = getReadCards();
+  if (!read.includes(id)) {
+    read.push(id);
+    localStorage.setItem(READ_KEY, JSON.stringify(read));
+    addXP(10);
+  }
+}
+
+// ═══════════════ STREAK ═══════════════
+function getStreak() { return JSON.parse(localStorage.getItem(STREAK_KEY) || '{"count":0,"lastDate":""}'); }
+function updateStreak() {
+  const today = new Date().toDateString();
+  const s = getStreak();
+  if (s.lastDate === today) return s.count;
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+  if (s.lastDate === yesterday.toDateString()) { s.count++; } else if (s.lastDate !== today) { s.count = 1; }
+  s.lastDate = today;
+  localStorage.setItem(STREAK_KEY, JSON.stringify(s));
+  return s.count;
+}
+
+// ═══════════════ AGE MODE ═══════════════
+let ageMode = localStorage.getItem(MODE_KEY) || 'teen';
+function toggleAgeMode() {
+  ageMode = ageMode === 'young' ? 'teen' : 'young';
+  localStorage.setItem(MODE_KEY, ageMode);
+  document.body.classList.toggle('young-mode', ageMode === 'young');
+  renderAll();
+  showToast(ageMode === 'young' ? T[lang].youngMode : T[lang].teenMode);
+  playSound('theme');
+}
+
+// ═══════════════ LANGUAGE & THEME ═══════════════
+let lang = document.documentElement.lang || 'ar';
+let currentTheme = document.documentElement.dataset.theme || 'nature';
+const THEMES = ['nature','night','ocean'];
+const THEME_ICONS = { nature:'🌿', night:'🌙', ocean:'🌊' };
+let currentPrincipleIdx = -1;
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-opt').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  renderAll();
+}
+
+function cycleTheme() {
+  const idx = (THEMES.indexOf(currentTheme) + 1) % THEMES.length;
+  currentTheme = THEMES[idx];
+  document.documentElement.dataset.theme = currentTheme;
+  document.getElementById('themeIcon').textContent = THEME_ICONS[currentTheme];
+  playSound('theme');
+}
+
+// ═══════════════ RENDER ALL ═══════════════
+function renderAll() {
+  const t = T[lang];
+  document.getElementById('appTitle').textContent = t.appTitle;
+  document.getElementById('splashSub').textContent = t.splashSub;
+  document.getElementById('splashHint').textContent = t.splashHint;
+  document.getElementById('tabHome').textContent = t.tabHome;
+  document.getElementById('tabCards').textContent = t.tabCards;
+  document.getElementById('tabQuiz').textContent = t.tabQuiz;
+  document.getElementById('tabProgress').textContent = t.tabProgress;
+  document.getElementById('tabAbout').textContent = t.tabAbout;
+  document.getElementById('cardsTitle').textContent = t.cardsTitle;
+  document.getElementById('cardsDesc').textContent = t.cardsDesc;
+  document.getElementById('quizTitle').textContent = t.quizTitle;
+  document.getElementById('quizDesc').textContent = t.quizDesc;
+  document.getElementById('progressTitle').textContent = t.progressTitle;
+  document.getElementById('progressDesc').textContent = t.progressDesc;
+  document.getElementById('helpTitle').textContent = t.helpTitle;
+  document.getElementById('duaPanelTitle').textContent = t.duaPanelTitle;
+  document.getElementById('ageModeBtn').textContent = ageMode === 'young' ? t.youngMode : t.teenMode;
+  renderHome();
+  renderCards();
+  renderProgress();
+  renderAbout();
+  renderHelp();
+  renderDuas();
+  renderTicker();
+}
+
+// ═══════════════ RENDER: HOME ═══════════════
+function renderHome() {
+  const t = T[lang];
+  const dayIdx = new Date().getDate() % CARDS.length;
+  const card = CARDS[dayIdx];
+  const d = card[lang];
+  document.getElementById('dailyCard').innerHTML = `
+    <div class="daily-label">${t.dailyLabel}</div>
+    <div class="daily-title">${card.emoji} ${d.title}</div>
+    <div class="daily-body">${ageMode === 'young' ? d.young : d.desc}</div>
+    <div class="daily-action" onclick="switchTab('cards');toggleCard('card-${card.id}')">${t.readMore} &#8594;</div>`;
+  document.getElementById('homeGrid').innerHTML = CARDS.map(c => {
+    const dd = c[lang];
+    return `<div class="home-card" onclick="switchTab('cards');toggleCard('card-${c.id}')">
+      <span class="hc-icon">${c.emoji}</span>
+      <div class="hc-title">${dd.title}</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════ RENDER: CARDS ═══════════════
+function renderCards() {
+  const t = T[lang];
+  const readCards = getReadCards();
+  const container = document.getElementById('cardsContainer');
+  const searchHTML = `<div class="search-bar"><span class="search-icon">🔍</span><input class="search-input" id="cardsSearch" placeholder="${t.searchPlaceholder}" oninput="filterCards(this.value)"></div>`;
+  container.innerHTML = searchHTML + CARDS.map(c => {
+    const d = c[lang];
+    const isRead = readCards.includes(c.id);
+    return `
+    <div class="trait-card scroll-reveal ${isRead ? 'read' : ''}" id="card-${c.id}">
+      <div class="trait-head" onclick="toggleCard('card-${c.id}');markCardRead(${c.id})">
+        <span class="trait-num">${c.id}</span>
+        <span class="trait-emoji">${c.emoji}</span>
+        <span class="trait-title">${d.title}</span>
+        ${isRead ? '<span class="trait-read-badge">&#10003;</span>' : ''}
+        <span class="trait-chev">&#9660;</span>
+      </div>
+      <div class="trait-body">
+        <div class="trait-inner">
+          <div class="trait-desc">${ageMode === 'young' ? d.young : d.desc}</div>
+          <div class="verse-box">
+            <div class="verse-arabic">${d.verse}</div>
+            <div class="verse-ref">${d.verseRef}</div>
+          </div>
+          <div class="hadith-box">
+            <span class="hadith-label">📜 ${t.hadith}</span>
+            <div class="hadith-text">${d.hadith}</div>
+          </div>
+          <div class="action-box">
+            <span class="action-icon">💡</span>
+            <span>${d.action}</span>
+          </div>
+          <button class="share-btn" onclick="shareCard(${c.id})"><span class="share-icon">📤</span> ${t.share}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCards(query) {
+  const cards = document.querySelectorAll('.trait-card');
+  const q = query.toLowerCase();
+  cards.forEach(card => {
+    const title = card.querySelector('.trait-title').textContent.toLowerCase();
+    const desc = card.querySelector('.trait-desc') ? card.querySelector('.trait-desc').textContent.toLowerCase() : '';
+    card.style.display = (!q || title.includes(q) || desc.includes(q)) ? '' : 'none';
+  });
+}
+
+function shareCard(id) {
+  const card = CARDS.find(c => c.id === id);
+  if (!card) return;
+  const d = card[lang];
+  const text = `${card.emoji} ${d.title}\n${d.desc}\n\n${d.verse} — ${d.verseRef}`;
+  if (navigator.share) { navigator.share({ title: d.title, text }); }
+  else { navigator.clipboard.writeText(text).then(() => showToast(lang==='ar'?'تم النسخ':'Copied!')); }
+}
+
+// ═══════════════ RENDER: QUIZ ═══════════════
+let quizState = { current: 0, score: 0, answers: [], lifelines: { fifty: true, hint: true, quran: true }, active: false };
+
+function renderQuiz() {
+  quizState = { current: 0, score: 0, answers: [], lifelines: { fifty: true, hint: true, quran: true }, active: true };
+  showQuizQuestion();
+}
+
+function showQuizQuestion() {
+  const t = T[lang];
+  const container = document.getElementById('quizContainer');
+  const result = document.getElementById('quizResult');
+  result.classList.add('hidden');
+  if (quizState.current >= QUIZ.length) { showQuizResult(); return; }
+  const q = QUIZ[quizState.current][lang];
+  const total = QUIZ.length;
+  const num = quizState.current + 1;
+  container.innerHTML = `
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${num/total*100}%"></div></div>
+    <div class="quiz-counter">${num} / ${total}</div>
+    <div class="quiz-question-card scroll-reveal">
+      <div class="quiz-q-text">${q.q}</div>
+      <div class="quiz-options" id="quizOpts">
+        ${q.opts.map((opt, i) => `<button class="quiz-opt" id="qopt-${i}" onclick="answerQuiz(${i})">${opt}</button>`).join('')}
+      </div>
+      <div class="quiz-lifelines">
+        <button class="lifeline-btn ${quizState.lifelines.fifty?'':'used'}" onclick="useFiftyFifty()" ${quizState.lifelines.fifty?'':'disabled'}>${t.lifeline5050}</button>
+        <button class="lifeline-btn ${quizState.lifelines.hint?'':'used'}" onclick="useHint()" ${quizState.lifelines.hint?'':'disabled'}>${t.lifelineHint}</button>
+        <button class="lifeline-btn ${quizState.lifelines.quran?'':'used'}" onclick="useQuranRef()" ${quizState.lifelines.quran?'':'disabled'}>${t.lifelineQuran}</button>
+      </div>
+      <div id="quizFeedback" class="quiz-feedback hidden"></div>
+    </div>`;
+}
+
+function answerQuiz(idx) {
+  if (!quizState.active) return;
+  const q = QUIZ[quizState.current][lang];
+  const correct = q.correct;
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((o, i) => {
+    o.disabled = true;
+    if (i === correct) o.classList.add('correct');
+    if (i === idx && i !== correct) o.classList.add('wrong');
+  });
+  const feedback = document.getElementById('quizFeedback');
+  feedback.classList.remove('hidden');
+  if (idx === correct) {
+    quizState.score++;
+    addXP(5);
+    feedback.innerHTML = `<span class="fb-correct">${T[lang].correct}</span>`;
+    playSound('success');
+  } else {
+    feedback.innerHTML = `<span class="fb-wrong">${T[lang].wrong}</span>`;
+    playSound('click');
+  }
+  quizState.answers.push(idx);
+  quizState.current++;
+  setTimeout(() => showQuizQuestion(), 1800);
+}
+
+function useFiftyFifty() {
+  if (!quizState.lifelines.fifty) return;
+  quizState.lifelines.fifty = false;
+  const q = QUIZ[quizState.current][lang];
+  const correct = q.correct;
+  const wrongIdxs = [0,1,2,3].filter(i => i !== correct);
+  const toHide = wrongIdxs.sort(() => Math.random() - 0.5).slice(0, 2);
+  toHide.forEach(i => { const el = document.getElementById('qopt-'+i); if(el) { el.style.visibility='hidden'; el.disabled=true; }});
+  document.querySelector('.lifeline-btn').classList.add('used');
+  playSound('click');
+}
+
+function useHint() {
+  if (!quizState.lifelines.hint) return;
+  quizState.lifelines.hint = false;
+  const q = QUIZ[quizState.current][lang];
+  const feedback = document.getElementById('quizFeedback');
+  feedback.classList.remove('hidden');
+  feedback.innerHTML = `<span class="fb-hint">💡 ${q.hint}</span>`;
+  playSound('click');
+}
+
+function useQuranRef() {
+  if (!quizState.lifelines.quran) return;
+  quizState.lifelines.quran = false;
+  const q = QUIZ[quizState.current][lang];
+  const feedback = document.getElementById('quizFeedback');
+  feedback.classList.remove('hidden');
+  feedback.innerHTML = `<span class="fb-quran">📖 ${q.quran}</span>`;
+  playSound('click');
+}
+
+function showQuizResult() {
+  const t = T[lang];
+  const total = QUIZ.length;
+  const pct = Math.round(quizState.score / total * 100);
+  const best = parseInt(localStorage.getItem(QUIZ_BEST_KEY) || '0');
+  if (pct > best) localStorage.setItem(QUIZ_BEST_KEY, pct);
+  addXP(20);
+  let emoji, title;
+  if (pct >= 80) { emoji = '🏆'; title = lang==='ar'?'عالم حقيقي!':lang==='fr'?'Un vrai savant !':'A True Scholar!'; }
+  else if (pct >= 50) { emoji = '📖'; title = lang==='ar'?'جيد جداً!':lang==='fr'?'Tres bien !':'Very Good!'; }
+  else { emoji = '🌱'; title = lang==='ar'?'واصل التعلم!':lang==='fr'?'Continue d\'apprendre !':'Keep Learning!'; }
+  document.getElementById('quizContainer').innerHTML = '';
+  const result = document.getElementById('quizResult');
+  result.classList.remove('hidden');
+  result.innerHTML = `
+    <div class="qr-emoji">${emoji}</div>
+    <div class="qr-score">${quizState.score}/${total}</div>
+    <div class="qr-title">${title}</div>
+    <div class="qr-desc">${pct}%</div>
+    <button class="quiz-submit" onclick="renderQuiz()">${t.tryAgain}</button>`;
+  result.scrollIntoView({ behavior: 'smooth' });
+  if (pct >= 80) launchConfetti();
+  quizState.active = false;
+}
+
+// ═══════════════ RENDER: PROGRESS ═══════════════
+function renderProgress() {
+  const t = T[lang];
+  const xp = getXP();
+  const level = getLevel(xp);
+  const streak = getStreak().count;
+  const readCards = getReadCards();
+  const earned = getEarnedBadges();
+  const bestQuiz = parseInt(localStorage.getItem(QUIZ_BEST_KEY) || '0');
+  const nextBadge = BADGE_DEFS.find(b => !earned.includes(b.id));
+  const nextXP = nextBadge ? nextBadge.xp : 1000;
+  const progressPct = Math.min(100, (xp / nextXP) * 100);
+
+  document.getElementById('progressContainer').innerHTML = `
+    <div class="progress-xp-card">
+      <div class="xp-header">
+        <span class="xp-icon">⭐</span>
+        <span class="xp-amount">${xp} ${t.xpLabel}</span>
+      </div>
+      <div class="xp-bar-wrap">
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:${progressPct}%"></div></div>
+        <span class="xp-level">${t.levelLabel} ${level}</span>
+      </div>
+      ${nextBadge ? `<div class="xp-next">${lang==='ar'?'التالي:':lang==='fr'?'Suivant:':'Next:'} ${nextBadge.emoji} ${nextBadge[lang]} (${nextBadge.xp} XP)</div>` : ''}
+    </div>
+    ${streak > 0 ? `<div class="streak-badge">🔥 ${streak} ${t.streakMsg}</div>` : ''}
+    <div class="progress-stats">
+      <div class="stat-card"><span class="stat-num">${readCards.length}</span><span class="stat-label">${lang==='ar'?'ركيزة مقروءة':lang==='fr'?'Piliers lus':'Pillars Read'}</span><span class="stat-total">/ ${CARDS.length}</span></div>
+      <div class="stat-card"><span class="stat-num">${bestQuiz}%</span><span class="stat-label">${lang==='ar'?'أفضل نتيجة':lang==='fr'?'Meilleur score':'Best Quiz'}</span></div>
+      <div class="stat-card"><span class="stat-num">${earned.length}</span><span class="stat-label">${lang==='ar'?'شارات':lang==='fr'?'Badges':'Badges'}</span><span class="stat-total">/ ${BADGE_DEFS.length}</span></div>
+    </div>
+    <div class="badges-section">
+      <h3 class="badges-title">${lang==='ar'?'🏅 الشارات':lang==='fr'?'🏅 Badges':'🏅 Badges'}</h3>
+      <div class="badges-grid">
+        ${BADGE_DEFS.map(b => `<div class="badge-item ${earned.includes(b.id)?'earned':'locked'}"><span class="badge-emoji">${b.emoji}</span><span class="badge-name">${b[lang]}</span><span class="badge-xp">${b.xp} XP</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function updateXPDisplay() {
+  const panel = document.getElementById('panel-progress');
+  if (panel && panel.classList.contains('active')) renderProgress();
+}
+
+// ═══════════════ RENDER: ABOUT ═══════════════
+function renderAbout() {
+  const about = {
+    ar: {
+      disclaimerTitle: '⚠️ تنبيه مهم',
+      disclaimer: 'لست عالماً ولا مفتياً. هذا جهد متواضع من مسلم يحب كتب الشيخ الغزالي. المحتوى مستمد من الكتاب ومصادر إسلامية موثوقة. ليست فتوى.',
+      authorName: 'الشيخ محمد الغزالي',
+      authorDates: '١٩١٧ — ١٩٩٦',
+      authorBio: 'عالم ومفكر إسلامي مصري، لُقب بـ"أديب الدعوة". ألّف أكثر من ٩٤ كتاباً. درس في الأزهر، ودرّس في جامعة الأمير عبد القادر بقسنطينة (الجزائر). حاصل على جائزة الملك فيصل.',
+      bookTitle: 'عن الكتاب',
+      bookDesc: '«دستور الوحدة الثقافية بين المسلمين» كتاب يدعو إلى توحيد الصف الإسلامي ثقافياً. يرى الشيخ الغزالي أن الوحدة لا تعني إلغاء التنوع بل تنظيمه ضمن إطار العقيدة المشتركة. يتناول الكتاب أركان الوحدة الثقافية من اللغة والتاريخ والتعليم والإعلام والاقتصاد.',
+      sourcesTitle: 'المصادر',
+      sources: ['كتاب "دستور الوحدة الثقافية بين المسلمين" — الشيخ محمد الغزالي','القرآن الكريم','صحيح البخاري ومسلم','سنن الترمذي وأبي داود'],
+      contact: 'تواصل: abdelhak.bourdim@gmail.com'
+    },
+    en: {
+      disclaimerTitle: '⚠️ Important Notice',
+      disclaimer: 'I am not a scholar or mufti. This is a humble effort by a Muslim who loves Sheikh al-Ghazali\'s books. Content is derived from the book and trusted Islamic sources. This is not a fatwa.',
+      authorName: 'Sheikh Mohammed al-Ghazali',
+      authorDates: '1917 — 1996',
+      authorBio: 'Egyptian Islamic scholar and thinker, nicknamed "The Literary Preacher." Author of 94+ books. Studied at Al-Azhar, taught at the University of Emir Abdelkader in Constantine, Algeria. King Faisal Award winner.',
+      bookTitle: 'About the Book',
+      bookDesc: '"Charter of Cultural Unity Among Muslims" is a book calling for cultural unification of the Muslim ranks. Sheikh al-Ghazali argues that unity does not mean eliminating diversity but organizing it within the framework of shared creed. The book covers pillars of cultural unity including language, history, education, media, and economics.',
+      sourcesTitle: 'Sources',
+      sources: ['"Charter of Cultural Unity Among Muslims" — Sheikh Mohammed al-Ghazali','The Holy Quran','Sahih al-Bukhari and Muslim','Sunan at-Tirmidhi and Abu Dawud'],
+      contact: 'Contact: abdelhak.bourdim@gmail.com'
+    },
+    fr: {
+      disclaimerTitle: '⚠️ Avis Important',
+      disclaimer: 'Je ne suis ni savant ni mufti. C\'est un effort humble d\'un musulman qui aime les livres du Sheikh al-Ghazali. Le contenu est tire du livre et de sources islamiques fiables. Ce n\'est pas une fatwa.',
+      authorName: 'Sheikh Mohammed al-Ghazali',
+      authorDates: '1917 — 1996',
+      authorBio: 'Savant et penseur islamique egyptien, surnomme "Le Litteraire de la Predication". Auteur de plus de 94 livres. Diplome d\'Al-Azhar, professeur a l\'Universite Emir Abdelkader de Constantine (Algerie). Laureat du Prix Roi Faysal.',
+      bookTitle: 'A Propos du Livre',
+      bookDesc: '"Charte de l\'Unite Culturelle entre les Musulmans" est un livre appelant a l\'unification culturelle des rangs musulmans. Le Sheikh al-Ghazali soutient que l\'unite ne signifie pas eliminer la diversite mais l\'organiser dans le cadre du credo commun. Le livre couvre les piliers de l\'unite culturelle incluant la langue, l\'histoire, l\'education, les medias et l\'economie.',
+      sourcesTitle: 'Sources',
+      sources: ['"Charte de l\'Unite Culturelle entre les Musulmans" — Sheikh Mohammed al-Ghazali','Le Saint Coran','Sahih al-Bukhari et Muslim','Sunan at-Tirmidhi et Abu Dawud'],
+      contact: 'Contact : abdelhak.bourdim@gmail.com'
+    }
+  };
+  const a = about[lang];
+  document.getElementById('aboutContainer').innerHTML = `
+    <div class="about-disclaimer">
+      <div class="about-disclaimer-title">${a.disclaimerTitle}</div>
+      <p>${a.disclaimer}</p>
+    </div>
+    <div class="about-author">
+      <span class="about-author-icon">📚</span>
+      <div class="about-author-info">
+        <div class="about-author-name">${a.authorName}</div>
+        <div class="about-author-dates">${a.authorDates}</div>
+        <div class="about-author-bio">${a.authorBio}</div>
+      </div>
+    </div>
+    <div class="about-section">
+      <div class="about-section-title">${a.bookTitle}</div>
+      <p class="about-text">${a.bookDesc}</p>
+    </div>
+    <div class="about-section">
+      <div class="about-section-title">${a.sourcesTitle}</div>
+      ${a.sources.map(s => `<p class="about-text">&#8226; ${s}</p>`).join('')}
+    </div>
+    <div class="about-section">
+      <p class="about-text">${a.contact}</p>
+    </div>`;
+}
+
+// ═══════════════ RENDER: HELP ═══════════════
+function renderHelp() {
+  const help = {
+    ar: [
+      {title:'⚠️ تنبيه',body:'لست عالماً. هذا جهد متواضع لنشر حكمة الشيخ الغزالي بطريقة تفاعلية.'},
+      {title:'📚 المصادر',body:'كتاب "دستور الوحدة الثقافية بين المسلمين" للشيخ محمد الغزالي، القرآن الكريم، السنة النبوية.'},
+      {title:'✨ المميزات',body:'ثلاث لغات (عربي/إنجليزي/فرنسي)، ٣ أنماط، ١٥ ركيزة، مسابقة تفاعلية، نظام نقاط وشارات، وضعان للأعمار.'},
+      {title:'🌟 وضع مستكشف صغير',body:'للأطفال ٧-١٢ سنة — نصوص مبسطة بالإيموجي، خط أكبر.'},
+      {title:'📖 وضع باحث شاب',body:'للشباب ١٣+ — نصوص كاملة مع آيات وأحاديث وتحليل.'},
+    ],
+    en: [
+      {title:'⚠️ Disclaimer',body:'I am not a scholar. This is a humble effort to share Sheikh al-Ghazali\'s wisdom interactively.'},
+      {title:'📚 Sources',body:'"Charter of Cultural Unity Among Muslims" by Sheikh Mohammed al-Ghazali, the Holy Quran, Prophetic Sunnah.'},
+      {title:'✨ Features',body:'Three languages (AR/EN/FR), 3 themes, 15 pillars, interactive quiz, XP and badges system, 2 age modes.'},
+      {title:'🌟 Young Explorer',body:'For kids 7-12 — simplified text with emojis, larger font.'},
+      {title:'📖 Teen Scholar',body:'For teens 13+ — full text with verses, hadiths, and analysis.'},
+    ],
+    fr: [
+      {title:'⚠️ Avertissement',body:'Je ne suis pas un savant. C\'est un effort humble pour partager la sagesse du Sheikh al-Ghazali.'},
+      {title:'📚 Sources',body:'"Charte de l\'Unite Culturelle entre les Musulmans" par Sheikh Mohammed al-Ghazali, le Saint Coran, la Sunnah.'},
+      {title:'✨ Fonctionnalites',body:'Trois langues (AR/EN/FR), 3 themes, 15 piliers, quiz interactif, systeme XP et badges, 2 modes d\'age.'},
+      {title:'🌟 Jeune Explorateur',body:'Pour enfants 7-12 ans — texte simplifie avec emojis, police plus grande.'},
+      {title:'📖 Jeune Chercheur',body:'Pour ados 13+ — texte complet avec versets, hadiths et analyse.'},
+    ]
+  };
+  document.getElementById('helpBody').innerHTML = help[lang].map(h => `
+    <div class="help-item">
+      <div class="help-item-title">${h.title}</div>
+      <div>${h.body}</div>
+    </div>`).join('');
+}
+
+// ═══════════════ RENDER: DUAS ═══════════════
+function renderDuas() {
+  document.getElementById('duaPanelContent').innerHTML = DUAS.map(d => {
+    const dd = d[lang];
+    return `<div class="dua-item">
+      <div class="dua-item-label">${dd.label}</div>
+      <div class="dua-item-ar">${dd.text}</div>
+      <div class="dua-item-tr">${dd.tr}</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════ TICKER ═══════════════
+function renderTicker() {
+  const tips = {
+    ar: ['📖 اقرأ ركيزة جديدة كل يوم','🏆 اجمع النقاط واربح الشارات','🌟 جرب وضع المستكشف الصغير','🤲 لا تنسَ دعاء الوحدة والأخوّة','⭐ أكمل ١٥ ركيزة لتصبح خبيراً'],
+    en: ['📖 Read a new pillar every day','🏆 Collect points and earn badges','🌟 Try Young Explorer mode','🤲 Don\'t forget duas for unity','⭐ Complete all 15 pillars to become an Expert'],
+    fr: ['📖 Lisez un nouveau pilier chaque jour','🏆 Collectez des points et gagnez des badges','🌟 Essayez le mode Jeune Explorateur','🤲 N\'oubliez pas les duas pour l\'unite','⭐ Completez les 15 piliers pour devenir Expert']
+  };
+  const items = tips[lang];
+  const doubled = [...items, ...items];
+  const ticker = document.getElementById('tickerText');
+  ticker.innerHTML = doubled.map(t => `<span class="tc">&nbsp;&nbsp;${t}&nbsp;&nbsp;•</span>`).join('');
+  ticker.style.animation = `tickerMarquee ${items.length * 6}s linear infinite`;
+}
+
+// ═══════════════ SPLASH SCREEN ═══════════════
+let splashTimer;
+function initSplash() {
+  const features = document.getElementById('splashFeatures');
+  if (features) {
+    features.innerHTML = T[lang].splashFeatures.map((f, i) =>
+      `<div class="splash-feature" style="animation-delay:${0.3+i*0.3}s">${f}</div>`
+    ).join('');
+  }
+  let count = 5;
+  const counter = document.getElementById('splashCount');
+  splashTimer = setInterval(() => {
+    count--;
+    if (counter) counter.textContent = count;
+    if (count <= 0) dismissSplash();
+  }, 1000);
+}
+function dismissSplash() {
+  clearInterval(splashTimer);
+  const splash = document.getElementById('splash');
+  if (splash) { splash.classList.add('hidden'); setTimeout(() => splash.remove(), 600); }
+}
+
+// ═══════════════ TAB SWITCHING ═══════════════
+function initTabs() {
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const name = tab.dataset.tab;
+      switchTab(name);
+    });
+  });
+}
+function switchTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('panel-' + name);
+  const tabBtn = document.querySelector(`.tab[data-tab="${name}"]`);
+  if (panel) panel.classList.add('active');
+  if (tabBtn) tabBtn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  playSound('click');
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(el => {
+      if (window._scrollObserver) window._scrollObserver.observe(el);
+    });
+    initTypewriter();
+  }, 100);
+}
+
+// ═══════════════ SCROLL REVEAL ═══════════════
+function initScrollReveal() {
+  if (!('IntersectionObserver' in window)) return;
+  window._scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        window._scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(el => window._scrollObserver.observe(el));
+}
+
+// ═══════════════ KEYBOARD NAVIGATION ═══════════════
+function initKeyboardNav() {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const hp = document.getElementById('helpPanel');
+      if (!hp.classList.contains('hidden')) { toggleHelp(); return; }
+      const dp = document.getElementById('duaPanel');
+      if (!dp.classList.contains('hidden')) { toggleDuaPanel(); return; }
+      document.querySelectorAll('.trait-card.open').forEach(c => c.classList.remove('open'));
+    }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      const panel = document.getElementById('panel-cards');
+      if (!panel || !panel.classList.contains('active')) return;
+      if (document.activeElement && document.activeElement.id === 'cardsSearch') return;
+      e.preventDefault();
+      const cards = Array.from(document.querySelectorAll('.trait-card')).filter(c => c.style.display !== 'none');
+      if (!cards.length) return;
+      if (currentPrincipleIdx >= 0 && currentPrincipleIdx < cards.length) cards[currentPrincipleIdx].classList.remove('open');
+      const dir = document.documentElement.dir === 'rtl' ? (e.key==='ArrowRight'?-1:1) : (e.key==='ArrowRight'?1:-1);
+      currentPrincipleIdx = Math.max(0, Math.min(cards.length-1, currentPrincipleIdx+dir));
+      cards[currentPrincipleIdx].classList.add('open');
+      cards[currentPrincipleIdx].scrollIntoView({ behavior:'smooth', block:'center' });
+      playSound('click');
+    }
+  });
+}
+
+// ═══════════════ UTILITIES ═══════════════
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  if (card) { card.classList.toggle('open'); playSound('click'); }
+}
+function toggleHelp() { document.getElementById('helpPanel').classList.toggle('hidden'); playSound('click'); }
+function toggleDuaPanel() { document.getElementById('duaPanel').classList.toggle('hidden'); playSound('click'); }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  const m = document.getElementById('toastMsg');
+  if (t && m) { m.textContent = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 2500); }
+}
+function initScrollTop() {
+  const btn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => { if (btn) btn.classList.toggle('visible', window.scrollY > 300); });
+}
+
+// ═══════════════ SOUND EFFECTS ═══════════════
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+function playSound(type) {
+  try {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    gain.gain.value = 0.06;
+    if (type==='click') { osc.frequency.value=800; osc.type='sine'; gain.gain.value=0.04; }
+    else if (type==='success') { osc.frequency.value=523; osc.type='sine'; gain.gain.value=0.06; }
+    else if (type==='theme') { osc.frequency.value=440; osc.type='triangle'; gain.gain.value=0.05; }
+    osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+  } catch(e) {}
+}
+
+// ═══════════════ CONFETTI ═══════════════
+function launchConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  canvas.style.display = 'block';
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const particles = [];
+  const colors = ['#2E7D32','#4CAF50','#81C784','#A5D6A7','#FFD54F','#FF8A65','#4FC3F7'];
+  for (let i = 0; i < 120; i++) {
+    particles.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height-canvas.height, w:Math.random()*10+5, h:Math.random()*6+3, color:colors[Math.floor(Math.random()*colors.length)], vx:(Math.random()-0.5)*4, vy:Math.random()*3+2, rot:Math.random()*360, rotSpeed:(Math.random()-0.5)*10 });
+  }
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => { p.x+=p.vx; p.y+=p.vy; p.rot+=p.rotSpeed; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore(); });
+    frame++;
+    if (frame < 120) requestAnimationFrame(draw);
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display='none'; }
+  }
+  draw();
+}
+
+// ═══════════════ TYPEWRITER ═══════════════
+function initTypewriter() {
+  const dailyTitle = document.querySelector('.daily-card .daily-title');
+  if (!dailyTitle || dailyTitle.dataset.twDone) return;
+  const fullText = dailyTitle.textContent;
+  dailyTitle.textContent = '';
+  dailyTitle.classList.add('typewriter-text');
+  dailyTitle.dataset.twDone = '1';
+  let i = 0;
+  const speed = Math.max(30, 2000 / fullText.length);
+  function typeChar() {
+    if (i < fullText.length) { dailyTitle.textContent += fullText.charAt(i); i++; setTimeout(typeChar, speed); }
+    else { setTimeout(() => dailyTitle.classList.add('tw-done'), 1500); }
+  }
+  setTimeout(typeChar, 500);
+}
+
+// ═══════════════ SWIPE GESTURES ═══════════════
+function initSwipeGestures() {
+  let touchStartX = 0, touchStartY = 0;
+  const tabOrder = ['home','cards','quiz','progress','about'];
+  document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(dx) < 80 || Math.abs(dy) > Math.abs(dx) * 0.5) return;
+    const current = tabOrder.findIndex(t => { const p = document.getElementById('panel-'+t); return p && p.classList.contains('active'); });
+    if (current < 0) return;
+    const isRTL = document.documentElement.dir === 'rtl';
+    let next;
+    if ((dx > 0 && !isRTL) || (dx < 0 && isRTL)) next = current - 1; else next = current + 1;
+    if (next >= 0 && next < tabOrder.length) switchTab(tabOrder[next]);
+  }, { passive: true });
+}
+
+// ═══════════════ INIT ═══════════════
 document.addEventListener('DOMContentLoaded', () => {
-  setTheme(theme); setLang(lang); initTabs(); initSplash(); initScrollTop();
-  renderHome(); renderCards(); renderReflections(); renderHabits(); renderQuiz(); renderAbout(); renderHelp(); renderDuas();
-  initScrollReveal(); initKeyboardNav();
+  document.body.classList.toggle('young-mode', ageMode === 'young');
+  updateStreak();
+  initSplash();
+  renderAll();
+  initTabs();
+  initScrollReveal();
+  initScrollTop();
+  initKeyboardNav();
+  initSwipeGestures();
+  initTypewriter();
 });
-
-function initSplash(){let c=5;const el=document.getElementById('splashCount');const f=document.getElementById('splashFeatures');if(f)f.innerHTML=T[lang].splashFeatures.map((x,i)=>`<div class="splash-feature" style="animation-delay:${0.3+i*0.3}s">${x}</div>`).join('');const iv=setInterval(()=>{c--;if(el)el.textContent=c;if(c<=0){dismissSplash();clearInterval(iv)}},1000)}
-function dismissSplash(){const s=document.getElementById('splash');if(s){s.classList.add('hidden');setTimeout(()=>s.style.display='none',500)}playSound('click')}
-
-function setLang(l){lang=l;localStorage.setItem('dustur-lang',l);const rtl=l==='ar';document.documentElement.lang=l;document.documentElement.dir=rtl?'rtl':'ltr';document.body.dir=rtl?'rtl':'ltr';document.querySelectorAll('.lang-opt').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const t=T[l];const s=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};s('appTitle',t.appTitle);s('splashSub',t.splashSub);s('splashHint',t.splashHint);s('tabHome',t.tabHome);s('tabCards',t.tabCards);s('tabReflections',t.tabReflections);s('tabHabits',t.tabHabits);s('tabQuiz',t.tabQuiz);s('tabAbout',t.tabAbout);s('cardsTitle',t.cardsTitle);s('cardsDesc',t.cardsDesc);s('reflectionsTitle',t.reflectionsTitle);s('reflectionsDesc',t.reflectionsDesc);s('habitsTitle',t.habitsTitle);s('habitsDesc',t.habitsDesc);s('quizTitle',t.quizTitle);s('quizDesc',t.quizDesc);s('helpTitle',t.helpTitle);s('duaPanelTitle',t.duaPanelTitle);s('habitsReset',t.resetBtn);renderHome();renderCards();renderReflections();renderHabits();renderQuiz();renderAbout();renderHelp();renderDuas();const f=document.getElementById('splashFeatures');if(f)f.innerHTML=T[l].splashFeatures.map((x,i)=>`<div class="splash-feature" style="animation-delay:${0.3+i*0.3}s">${x}</div>`).join('')}
-
-function setTheme(t){theme=t;document.documentElement.dataset.theme=t;localStorage.setItem('dustur-theme',t);const i=themes.indexOf(t);const e=document.getElementById('themeIcon');if(e)e.textContent=themeIcons[i]}
-function cycleTheme(){const i=(themes.indexOf(theme)+1)%themes.length;setTheme(themes[i]);showToast(themeNames[themes[i]]);playSound('theme')}
-
-function initTabs(){document.querySelectorAll('.tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');const p=document.getElementById('panel-'+tab.dataset.tab);if(p)p.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});playSound('click')})})}
-
-function renderHome(){const t=T[lang];const d=new Date().getDate()%CARDS.length;const c=CARDS[d][lang];document.getElementById('dailyCard').innerHTML=`<div class="daily-label">${t.dailyLabel}</div><div class="daily-title">${c.title}</div><div class="daily-body">${c.desc}</div><div class="daily-action" onclick="document.querySelector('[data-tab=cards]').click()">${t.tabCards} &#8594;</div>`;const secs=[{icon:'🃏',tab:'cards',title:t.tabCards,desc:lang==='ar'?'٢٠ بطاقة عن الوحدة':lang==='fr'?'20 cartes sur l\'unite':'20 cards on unity'},{icon:'💭',tab:'reflections',title:t.tabReflections,desc:lang==='ar'?'تأملات في الوحدة':lang==='fr'?'Reflexions':'Reflections'},{icon:'📋',tab:'habits',title:t.tabHabits,desc:lang==='ar'?'تتبع يومي':lang==='fr'?'Suivi':'Tracking'},{icon:'🤔',tab:'quiz',title:t.tabQuiz,desc:lang==='ar'?'اختبر فهمك':lang==='fr'?'Testez-vous':'Test yourself'},{icon:'📖',tab:'about',title:t.tabAbout,desc:lang==='ar'?'عن الكتاب':lang==='fr'?'Le livre':'Book'}];document.getElementById('homeGrid').innerHTML=secs.map(s=>`<div class="home-card" onclick="document.querySelector('[data-tab=${s.tab}]').click()"><span class="hc-icon">${s.icon}</span><div class="hc-title">${s.title}</div><div class="hc-desc">${s.desc}</div></div>`).join('')}
-
-function renderCards(){const t=T[lang];const sb=`<div class="search-bar"><input type="text" id="cardsSearch" class="search-input" placeholder="${t.searchPlaceholder}" oninput="filterCards(this.value)"><span class="search-icon">🔍</span></div>`;const cards=CARDS.map((c,i)=>{const d=c[lang];return`<div class="principle-card scroll-reveal" id="card-${c.id}" data-search="${d.title.toLowerCase()}"><div class="principle-head" onclick="toggleCard('card-${c.id}')"><span class="principle-num">${c.id}</span><span class="principle-emoji">${c.emoji}</span><span class="principle-title">${d.title}</span><span class="principle-chev">&#9660;</span></div><div class="principle-body"><div class="principle-inner"><p class="principle-desc">${d.desc}</p><div class="verse-box"><div class="verse-arabic">${d.verse}</div></div><div class="action-box"><span class="action-icon">💡</span><span>${d.action}</span></div><button class="share-btn" onclick="event.stopPropagation();shareCard(${i})"><span class="share-icon">&#128279;</span> ${t.share}</button></div></div></div>`}).join('');document.getElementById('cardsContainer').innerHTML=sb+cards}
-
-function filterCards(q){q=q.toLowerCase().trim();document.querySelectorAll('.principle-card').forEach(c=>{const s=c.dataset.search||'';const t=c.querySelector('.principle-title');const tt=t?t.textContent.toLowerCase():'';c.style.display=(!q||s.includes(q)||tt.includes(q))?'':'none'})}
-
-async function shareCard(i){const c=CARDS[i];const d=c[lang];const t=`${c.emoji} ${d.title}\n\n${d.desc}\n\n💡 ${d.action}\n\n— دستور الوحدة الثقافية`;if(navigator.share){try{await navigator.share({title:d.title,text:t})}catch(e){}}else{try{await navigator.clipboard.writeText(t);showToast(lang==='ar'?'تم النسخ!':lang==='fr'?'Copie !':'Copied!')}catch(e){showToast('Could not copy')}}}
-
-function renderReflections(){const t=T[lang];document.getElementById('reflectionsContainer').innerHTML=REFLECTIONS.map(r=>{const d=r[lang];return`<div class="anxiety-card scroll-reveal"><div class="anxiety-header"><span class="anxiety-emoji">${r.emoji}</span><span class="anxiety-title">${d.title}</span></div><div class="anxiety-problem"><span class="anxiety-label">❓ ${lang==='ar'?'السؤال':lang==='fr'?'La Question':'The Question'}</span>${d.question}</div><div class="anxiety-solution"><span class="anxiety-label">💡 ${lang==='ar'?'الإجابة':lang==='fr'?'La Reponse':'The Answer'}</span>${d.answer}</div><div class="verse-box"><div class="verse-arabic">${d.verse}</div><div class="verse-ref">${d.verseRef}</div></div></div>`}).join('')}
-
-function renderHabits(){const today=new Date().toDateString();let hs=JSON.parse(localStorage.getItem('dustur-habits')||'{}');if(hs.date!==today){updateStreak(hs);hs={date:today,done:[]};localStorage.setItem('dustur-habits',JSON.stringify(hs))}const streak=getStreak();const sh=streak>0?`<div class="streak-badge">🔥 ${streak} ${T[lang].streakMsg}</div>`:'';document.getElementById('habitsContainer').innerHTML=HABITS.map((h,i)=>{const d=h[lang];const done=hs.done.includes(i);return`<div class="habit-item ${done?'done':''}" onclick="toggleHabit(${i})"><span class="habit-check">${done?'&#10003;':''}</span><span class="habit-emoji">${h.emoji}</span><div><div class="habit-label">${d.label}</div><div class="habit-source">${d.source}</div></div></div>`}).join('');const se=document.getElementById('streakBadge');if(se)se.innerHTML=sh;updateHabitsProgress(hs)}
-
-function toggleHabit(i){const today=new Date().toDateString();let hs=JSON.parse(localStorage.getItem('dustur-habits')||'{}');if(hs.date!==today)hs={date:today,done:[]};const idx=hs.done.indexOf(i);if(idx>-1)hs.done.splice(idx,1);else hs.done.push(i);localStorage.setItem('dustur-habits',JSON.stringify(hs));renderHabits();playSound(idx>-1?'click':'success');if(hs.done.length===HABITS.length){launchConfetti();showToast(T[lang].allDone)}}
-
-function resetHabits(){localStorage.setItem('dustur-habits',JSON.stringify({date:new Date().toDateString(),done:[]}));renderHabits();showToast(lang==='ar'?'تم إعادة التعيين':lang==='fr'?'Reinitialise':'Reset')}
-function updateHabitsProgress(hs){const d=hs.done.length,t=HABITS.length;const f=document.getElementById('habitsFill');const tx=document.getElementById('habitsText');if(f)f.style.width=(t>0?d/t*100:0)+'%';if(tx)tx.textContent=`${d}/${t}`}
-function updateStreak(p){let s=JSON.parse(localStorage.getItem('dustur-streak')||'{"count":0,"lastDate":""}');if(p&&p.done&&p.done.length===HABITS.length&&p.date){const y=new Date();y.setDate(y.getDate()-1);if(p.date===y.toDateString())s.count++;else if(p.date!==new Date().toDateString())s.count=p.done.length===HABITS.length?1:0;s.lastDate=p.date}else if(p&&p.date){s.count=0;s.lastDate=p.date}localStorage.setItem('dustur-streak',JSON.stringify(s))}
-function getStreak(){return JSON.parse(localStorage.getItem('dustur-streak')||'{"count":0}').count}
-
-function launchConfetti(){const cv=document.getElementById('confettiCanvas');if(!cv)return;cv.style.display='block';const ctx=cv.getContext('2d');cv.width=window.innerWidth;cv.height=window.innerHeight;const ps=[];const cols=['#1565C0','#42A5F5','#90CAF9','#FFD54F','#66BB6A','#E57373','#B388FF'];for(let i=0;i<120;i++)ps.push({x:Math.random()*cv.width,y:Math.random()*cv.height-cv.height,w:Math.random()*10+5,h:Math.random()*6+3,color:cols[Math.floor(Math.random()*cols.length)],vx:(Math.random()-0.5)*4,vy:Math.random()*3+2,rot:Math.random()*360,rs:(Math.random()-0.5)*10});let f=0;function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.rs;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore()});f++;if(f<120)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none'}}draw()}
-
-function renderQuiz(){const t=T[lang];document.getElementById('quizContainer').innerHTML=QUIZ.map((q,i)=>`<div class="quiz-question scroll-reveal" id="quiz-q-${i}"><div class="quiz-q-text">${i+1}. ${q[lang]}</div><div class="quiz-options"><button class="quiz-opt" onclick="selectQuizOpt(${i},2)">${t.yes}</button><button class="quiz-opt" onclick="selectQuizOpt(${i},1)">${t.sometimes}</button><button class="quiz-opt" onclick="selectQuizOpt(${i},0)">${t.no}</button></div></div>`).join('')+`<button class="quiz-submit" onclick="submitQuiz()">${t.submitQuiz}</button>`;document.getElementById('quizResult').classList.add('hidden');window._quizAnswers={}}
-
-function selectQuizOpt(qi,val){window._quizAnswers[qi]=val;document.querySelectorAll(`#quiz-q-${qi} .quiz-opt`).forEach((o,oi)=>o.classList.toggle('selected',[2,1,0][oi]===val));playSound('click')}
-
-function submitQuiz(){const ans=window._quizAnswers||{};if(Object.keys(ans).length<QUIZ.length){showToast(lang==='ar'?'أجب على جميع الأسئلة':lang==='fr'?'Repondez a toutes les questions':'Answer all questions');return}const inv=[1,3];let sc=0;Object.entries(ans).forEach(([qi,v])=>{sc+=inv.includes(parseInt(qi))?(2-v):v});const mx=QUIZ.length*2;const pct=Math.round(sc/mx*100);let em,ti,de;if(pct>=75){em='🌟';ti=lang==='ar'?'ممتاز!':lang==='fr'?'Excellent !':'Excellent!';de=lang==='ar'?'فهمك لأسس الوحدة عميق!':lang==='fr'?'Votre comprehension est profonde !':'Your understanding is deep!'}else if(pct>=50){em='🤝';ti=lang==='ar'?'جيد':lang==='fr'?'Bien':'Good';de=lang==='ar'?'أنت على الطريق الصحيح.':lang==='fr'?'Vous etes sur la bonne voie.':'You\'re on the right track.'}else{em='📖';ti=lang==='ar'?'اقرأ المزيد':lang==='fr'?'Lisez plus':'Read More';de=lang==='ar'?'حان وقت التعلم عن الوحدة.':lang==='fr'?'Il est temps d\'apprendre sur l\'unite.':'Time to learn about unity.'}const r=document.getElementById('quizResult');r.classList.remove('hidden');r.innerHTML=`<div class="qr-emoji">${em}</div><div class="qr-score">${pct}%</div><div class="qr-title">${ti}</div><div class="qr-desc">${de}</div><button class="quiz-submit" onclick="renderQuiz()" style="margin-top:16px">${T[lang].quizAgain}</button>`;r.scrollIntoView({behavior:'smooth'});playSound('success')}
-
-function renderAbout(){const a={ar:{dt:'⚠️ تنبيه مهم',d:'لست عالماً ولا مفتياً. هذا جهد متواضع من مسلم يحب كتب الشيخ الغزالي.',an:'الشيخ محمد الغزالي',ad:'١٩١٧ — ١٩٩٦',ab:'عالم ومفكر إسلامي مصري، لُقب بأديب الدعوة. ألّف أكثر من ٩٤ كتاباً.',bt:'عن الكتاب',bd:'كتاب "دستور الوحدة الثقافية بين المسلمين" يدعو لتوحيد الأمة الإسلامية على أساس القرآن والسنة مع احترام التنوع المذهبي والثقافي. يحارب التعصب ويبني جسور الحوار.',st:'المصادر',ss:['كتاب "دستور الوحدة الثقافية" — الشيخ محمد الغزالي','القرآن الكريم','صحيح البخاري ومسلم'],c:'تواصل: abdelhak.bourdim@gmail.com'},en:{dt:'⚠️ Important Notice',d:'I am not a scholar or mufti. This is a humble effort by a Muslim who loves Sheikh al-Ghazali\'s books.',an:'Sheikh Mohammed al-Ghazali',ad:'1917 — 1996',ab:'Egyptian Islamic scholar and thinker. Author of 94+ books. Known for fighting rigidity and building bridges of dialogue.',bt:'About the Book',bd:'"Charter of Cultural Unity Among Muslims" calls for unifying the Islamic Ummah based on Quran and Sunnah while respecting doctrinal and cultural diversity. It fights fanaticism and builds bridges of dialogue.',st:'Sources',ss:['"Dustur Al-Wahdah" by Sheikh Mohammed al-Ghazali','The Holy Quran','Sahih al-Bukhari and Muslim'],c:'Contact: abdelhak.bourdim@gmail.com'},fr:{dt:'⚠️ Avis Important',d:'Je ne suis ni savant ni mufti. C\'est un effort humble d\'un musulman qui aime les livres du Sheikh al-Ghazali.',an:'Sheikh Mohammed al-Ghazali',ad:'1917 — 1996',ab:'Savant et penseur islamique egyptien. Auteur de plus de 94 livres.',bt:'A Propos du Livre',bd:'La Charte de l\'Unite Culturelle entre Musulmans appelle a l\'unification de l\'Oumma islamique basee sur le Coran et la Sunnah tout en respectant la diversite doctrinale et culturelle.',st:'Sources',ss:['Dustur Al-Wahdah par Sheikh Mohammed al-Ghazali','Le Saint Coran','Sahih al-Bukhari et Muslim'],c:'Contact : abdelhak.bourdim@gmail.com'}}[lang];document.getElementById('aboutContainer').innerHTML=`<div class="about-disclaimer"><div class="about-disclaimer-title">${a.dt}</div><p>${a.d}</p></div><div class="about-author"><span class="about-author-icon">📚</span><div class="about-author-info"><div class="about-author-name">${a.an}</div><div class="about-author-dates">${a.ad}</div><div class="about-author-bio">${a.ab}</div></div></div><div class="about-section"><div class="about-section-title">${a.bt}</div><p class="about-text">${a.bd}</p></div><div class="about-section"><div class="about-section-title">${a.st}</div>${a.ss.map(s=>`<p class="about-text">&#8226; ${s}</p>`).join('')}</div><div class="about-section"><p class="about-text">${a.c}</p></div>`}
-
-function renderHelp(){const h={ar:[{title:'⚠️ تنبيه',body:'لست عالماً. هذا جهد متواضع لنشر حكمة الشيخ الغزالي.'},{title:'📚 المصادر',body:'كتاب "دستور الوحدة الثقافية" للشيخ محمد الغزالي.'},{title:'✨ المميزات',body:'٣ لغات، ٣ أنماط، ٢٠ بطاقة، ٦ تأملات، تتبع عادات، اختبار، أدعية.'}],en:[{title:'⚠️ Disclaimer',body:'I am not a scholar. This is a humble effort to share Sheikh al-Ghazali\'s wisdom.'},{title:'📚 Sources',body:'"Charter of Cultural Unity" by Sheikh Mohammed al-Ghazali.'},{title:'✨ Features',body:'3 languages, 3 themes, 20 cards, 6 reflections, habit tracker, quiz, duas.'}],fr:[{title:'⚠️ Avertissement',body:'Je ne suis pas un savant. Effort humble pour partager la sagesse du Sheikh.'},{title:'📚 Sources',body:'Charte de l\'Unite Culturelle par Sheikh Mohammed al-Ghazali.'},{title:'✨ Fonctionnalites',body:'3 langues, 3 themes, 20 cartes, 6 reflexions, suivi habitudes, quiz, duas.'}]}[lang];document.getElementById('helpBody').innerHTML=h.map(x=>`<div class="help-item"><div class="help-item-title">${x.title}</div><div>${x.body}</div></div>`).join('')}
-
-function renderDuas(){document.getElementById('duaPanelContent').innerHTML=DUAS.map(d=>{const dd=d[lang];return`<div class="dua-item"><div class="dua-item-label">${dd.label}</div><div class="dua-item-ar">${dd.text}</div><div class="dua-item-tr">${dd.tr}</div></div>`}).join('')}
-
-function initScrollReveal(){if(!('IntersectionObserver' in window))return;const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('revealed');obs.unobserve(en.target)}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});function o(){document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(el=>obs.observe(el))}o();document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setTimeout(o,100)))}
-
-function initKeyboardNav(){document.addEventListener('keydown',e=>{if(e.key==='Escape'){const hp=document.getElementById('helpPanel');if(!hp.classList.contains('hidden')){toggleHelp();return}const dp=document.getElementById('duaPanel');if(!dp.classList.contains('hidden')){toggleDuaPanel();return}document.querySelectorAll('.principle-card.open').forEach(c=>c.classList.remove('open'))}if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const p=document.getElementById('panel-cards');if(!p||!p.classList.contains('active'))return;if(document.activeElement&&document.activeElement.id==='cardsSearch')return;e.preventDefault();const cards=Array.from(document.querySelectorAll('.principle-card')).filter(c=>c.style.display!=='none');if(!cards.length)return;if(currentCardIdx>=0&&currentCardIdx<cards.length)cards[currentCardIdx].classList.remove('open');const dir=(document.documentElement.dir==='rtl')?(e.key==='ArrowRight'?-1:1):(e.key==='ArrowRight'?1:-1);currentCardIdx=Math.max(0,Math.min(cards.length-1,currentCardIdx+dir));cards[currentCardIdx].classList.add('open');cards[currentCardIdx].scrollIntoView({behavior:'smooth',block:'center'});playSound('click')}})}
-
-function toggleCard(id){const c=document.getElementById(id);if(c){c.classList.toggle('open');playSound('click')}}
-function toggleHelp(){document.getElementById('helpPanel').classList.toggle('hidden');playSound('click')}
-function toggleDuaPanel(){document.getElementById('duaPanel').classList.toggle('hidden');playSound('click')}
-function showToast(msg){const t=document.getElementById('toast');const m=document.getElementById('toastMsg');if(t&&m){m.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}}
-function initScrollTop(){const b=document.getElementById('scrollTop');window.addEventListener('scroll',()=>{if(b)b.classList.toggle('visible',window.scrollY>300)})}
-
-const AudioCtx=window.AudioContext||window.webkitAudioContext;let audioCtx;
-function playSound(type){try{if(!audioCtx)audioCtx=new AudioCtx();const o=audioCtx.createOscillator();const g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);g.gain.value=0.06;if(type==='click'){o.frequency.value=800;o.type='sine';g.gain.value=0.04}else if(type==='success'){o.frequency.value=523;o.type='sine';g.gain.value=0.06}else if(type==='theme'){o.frequency.value=440;o.type='triangle';g.gain.value=0.05}o.start();o.stop(audioCtx.currentTime+0.1)}catch(e){}}
